@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Residences — Skjól Avon | Luxury Condominiums in the Vail Valley</title>
+  <meta name="description" content="Explore 108 luxury residences at Skjól Avon — studios to penthouses, 510 to 3,200+ SF. Scandinavian-inspired design with wide-plank oak floors, chef's kitchens, and floor-to-ceiling windows.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== DESIGN TOKENS ===== */
+    :root {
+      --navy: #3D3D5C;
+      --navy-light: #4A4A6A;
+      --navy-dark: #2D2D45;
+      --purple-mist: #8B7BA8;
+      --cream: #F5F0EB;
+      --cream-light: #FAF8F5;
+      --white: #FFFFFF;
+      --gold: #C4A97D;
+      --gold-light: #D4BE9A;
+      --text-dark: #2A2A3E;
+      --text-body: #555566;
+      --text-light: #888899;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      --rune-glow: #7EC8E3;
+      --rune-glow-rgb: 126, 200, 227;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--text-dark); background: var(--white); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== SHARED TYPOGRAPHY ===== */
+    .section-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--purple-mist);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: 44px;
+      font-weight: 400;
+      color: var(--text-dark);
+      line-height: 1.15;
+    }
+    .wavy-divider {
+      display: block;
+      margin: 18px 0 24px;
+      width: 80px;
+      height: 8px;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .btn-primary {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--navy-dark); }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--white);
+    }
+    .btn-gold:hover { background: var(--gold-light); }
+    .btn-secondary {
+      background: transparent;
+      border: 1.5px solid var(--white);
+      color: var(--white);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--navy);
+      color: var(--navy);
+    }
+    .btn-outline:hover { background: var(--navy); color: var(--white); }
+    .btn-outline:hover svg path { stroke: var(--white); }
+    .arrow-icon { transition: transform 0.3s ease; }
+    .btn:hover .arrow-icon { transform: translateX(3px); }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 50px;
+      transition: all 0.4s ease;
+    }
+    .nav.scrolled {
+      background: rgba(45, 45, 69, 0.97);
+      padding: 14px 50px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-logo img { width: 38px; height: auto; transition: all 0.3s ease; }
+    .nav.scrolled .nav-logo img { width: 30px; height: auto; }
+    .nav-logo-text {
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--white);
+      transition: all 0.3s ease;
+    }
+    .nav-logo:hover .nav-logo-text {
+      color: var(--rune-glow);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      transition: all 0.3s ease;
+    }
+    .nav-links a:hover {
+      color: var(--rune-glow);
+    }
+    .nav-links a.active { color: var(--gold); }
+    .nav-cta {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--gold);
+      padding: 10px 24px;
+      transition: all 0.3s ease;
+    }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* Mobile nav overlay */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 999;
+      background: rgba(45, 45, 69, 0.98);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--white);
+      transition: all 0.3s ease;
+    }
+    .mobile-nav a:hover {
+      color: var(--rune-glow);
+    }
+    .mobile-nav .nav-cta {
+      margin-top: 12px;
+      padding: 14px 36px;
+    }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      position: relative;
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--navy-dark);
+    }
+    .page-hero-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(180deg, rgba(26,26,46,0.82) 0%, rgba(45,45,69,0.7) 50%, rgba(45,45,69,0.88) 100%);
+      z-index: 0;
+    }
+    /* Aurora borealis effect */
+    .page-hero-aurora {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 70%;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at 25% 0%, rgba(126,200,227,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 0%, rgba(139,123,168,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 20%, rgba(196,169,125,0.06) 0%, transparent 45%);
+      animation: auroraShift 10s ease-in-out infinite alternate;
+    }
+    @keyframes auroraShift {
+      0% { opacity: 0.6; transform: translateX(-3%) scaleY(1); }
+      50% { opacity: 1; transform: translateX(2%) scaleY(1.05); }
+      100% { opacity: 0.7; transform: translateX(3%) scaleY(0.95); }
+    }
+    /* Floating rune particles */
+    .page-hero-particles {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .rune-particle {
+      position: absolute;
+      opacity: 0;
+      animation: runeFloat linear infinite;
+    }
+    @keyframes runeFloat {
+      0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { opacity: 0; transform: translateY(-220px) rotate(45deg); }
+    }
+    /* Decorative rune border */
+    .page-hero-rune-border {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      z-index: 1;
+      background: linear-gradient(90deg, transparent, rgba(126,200,227,0.3), rgba(196,169,125,0.4), rgba(126,200,227,0.3), transparent);
+    }
+    .page-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      padding: 0 24px;
+    }
+    .page-hero-title {
+      font-family: var(--serif);
+      font-size: 56px;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .page-hero-sub {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* ===== INTRO SECTION ===== */
+    .intro-section {
+      padding: 80px 50px;
+      background: var(--cream-light);
+    }
+    .intro-inner {
+      max-width: 780px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .intro-inner p {
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--text-body);
+    }
+
+    /* ===== RESIDENCE GALLERY ===== */
+    .residence-gallery {
+      padding: 100px 50px 0;
+      background: var(--white);
+    }
+    .residence-gallery-header {
+      max-width: 1100px;
+      margin: 0 auto 56px;
+      text-align: center;
+    }
+
+    /* Individual residence section */
+    .residence-item {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 60px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .residence-item:last-child { border-bottom: none; }
+    .residence-item.reverse { direction: rtl; }
+    .residence-item.reverse > * { direction: ltr; }
+    .residence-floorplan {
+      width: 100%;
+      background: var(--cream-light);
+      border: 1px solid rgba(0,0,0,0.06);
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+    .residence-floorplan img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .residence-floorplan-placeholder {
+      width: 100%;
+      min-height: 320px;
+      background: var(--cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text-light);
+      letter-spacing: 1px;
+    }
+    .residence-details {}
+    .residence-type-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+    .residence-name {
+      font-family: var(--serif);
+      font-size: 34px;
+      font-weight: 400;
+      color: var(--text-dark);
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+    .residence-specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .spec-value {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--navy);
+    }
+    .spec-label {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-light);
+    }
+    .residence-price {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+    .residence-desc {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+    .residence-features {
+      list-style: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px 20px;
+      margin-bottom: 28px;
+    }
+    .residence-features li {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text-body);
+      padding-left: 16px;
+      position: relative;
+    }
+    .residence-features li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 8px;
+      width: 6px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    /* ===== FEATURES SECTION ===== */
+    .features-section {
+      padding: 100px 50px;
+      background: var(--cream);
+    }
+    .features-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .features-content .section-label { margin-bottom: 12px; }
+    .features-content .section-title { margin-bottom: 8px; }
+    .features-list {
+      list-style: none;
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px 32px;
+    }
+    .features-list li {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-body);
+      line-height: 1.6;
+      padding-left: 20px;
+      position: relative;
+    }
+    .features-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 9px;
+      width: 8px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .features-image {
+      width: 100%;
+      height: 480px;
+      background: var(--navy-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: rgba(255,255,255,0.5);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1px;
+    }
+
+    /* ===== BUILDING HIGHLIGHTS STRIP ===== */
+    .highlights-strip {
+      padding: 48px 50px;
+      background: var(--navy-dark);
+    }
+    .highlights-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+    .highlight-item {}
+    .highlight-value {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .highlight-label {
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+    }
+
+    /* ===== CTA SECTION ===== */
+    .cta-section {
+      padding: 100px 50px;
+      background: var(--navy-dark);
+      text-align: center;
+    }
+    .cta-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .cta-inner .section-label { color: var(--gold-light); }
+    .cta-inner .section-title { color: var(--white); margin-bottom: 16px; }
+    .cta-sub {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.7;
+      margin-bottom: 40px;
+    }
+    .cta-actions {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .cta-lookbook {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.5);
+      transition: color 0.3s ease;
+    }
+    .cta-lookbook:hover { color: var(--gold); }
+    .cta-lookbook svg { width: 14px; height: 14px; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--navy-dark);
+      padding: 60px 50px 36px;
+      color: rgba(255,255,255,0.6);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand-logo { width: 44px; height: auto; margin-bottom: 16px; }
+    .footer-tagline {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-style: italic;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 20px;
+    }
+    .footer-contact p {
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 2;
+    }
+    .footer-contact a {
+      color: var(--gold-light);
+      transition: all 0.3s ease;
+    }
+    .footer-contact a:hover {
+      color: var(--rune-glow);
+    }
+    .footer-nav-title {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 18px;
+    }
+    .footer-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-nav-links a {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      transition: all 0.3s ease;
+    }
+    .footer-nav-links a:hover {
+      color: var(--rune-glow);
+    }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+    }
+    .footer-legal {
+      font-family: var(--sans);
+      font-size: 11px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ===== RUNE GLOW — LETTER BY LETTER ===== */
+    .rune-text span {
+      display: inline-block;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .rune-text:hover span,
+    .rune-hover:hover .rune-text span {
+      color: var(--rune-glow);
+      text-shadow: 0 0 7px rgba(var(--rune-glow-rgb), 0.8), 0 0 20px rgba(var(--rune-glow-rgb), 0.4), 0 0 40px rgba(var(--rune-glow-rgb), 0.2);
+    }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .nav { padding: 16px 24px; }
+      .nav.scrolled { padding: 12px 24px; }
+      .nav-links, .nav > .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .page-hero-title { font-size: 40px; }
+      .page-hero-sub { font-size: 12px; letter-spacing: 2px; }
+
+      .intro-section { padding: 64px 24px; }
+
+      .residence-gallery { padding: 64px 24px 0; }
+      .residence-item { grid-template-columns: 1fr; gap: 32px; padding: 40px 0; }
+      .residence-item.reverse { direction: ltr; }
+      .residence-name { font-size: 28px; }
+      .residence-features { grid-template-columns: 1fr; }
+
+      .features-section { padding: 64px 24px; }
+      .features-inner { grid-template-columns: 1fr; gap: 40px; }
+      .features-list { grid-template-columns: 1fr; }
+      .features-image { height: 320px; }
+
+      .highlights-strip { padding: 40px 24px; }
+      .highlights-inner { grid-template-columns: 1fr 1fr; gap: 24px; }
+
+      .cta-section { padding: 64px 24px; }
+
+      .section-title { font-size: 34px; }
+
+      .footer { padding: 48px 24px 28px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 480px) {
+      .page-hero-title { font-size: 32px; }
+      .highlights-inner { grid-template-columns: 1fr; gap: 20px; }
+      .cta-actions { flex-direction: column; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav" id="mainNav">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo-transparent.png" alt="Skjól">
+      <span class="nav-logo-text">Skjol</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="residences.html" class="active">Residences</a></li>
+      <li><a href="amenities.html">Amenities</a></li>
+      <li><a href="location.html">Location</a></li>
+      <li><a href="vision.html">The Vision</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Register</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="residences.html" onclick="closeMobile()">Residences</a>
+    <a href="amenities.html" onclick="closeMobile()">Amenities</a>
+    <a href="location.html" onclick="closeMobile()">Location</a>
+    <a href="vision.html" onclick="closeMobile()">The Vision</a>
+    <a href="contact.html" onclick="closeMobile()">Contact</a>
+    <a href="contact.html" class="nav-cta" onclick="closeMobile()">Register Now</a>
+  </div>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="page-hero" style="background-image: url('images/hero.jpg');">
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-aurora"></div>
+    <div class="page-hero-particles" id="heroParticles"></div>
+    <div class="page-hero-rune-border"></div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title">The Residences</h1>
+      <p class="page-hero-sub">Crafted for how you actually live</p>
+    </div>
+  </section>
+
+  <!-- ===== INTRO ===== -->
+  <section class="intro-section">
+    <div class="intro-inner reveal">
+      <span class="section-label">Design Philosophy</span>
+      <svg class="wavy-divider" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg" style="margin-left:auto;margin-right:auto;">
+        <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#3D3D5C" stroke-width="1.2"/>
+      </svg>
+      <p>Every residence at Skjol draws from the Scandinavian tradition of purposeful beauty -- clean lines that calm the eye, warm materials that invite touch, and floor plans that flex around the way real life unfolds. Light pours through floor-to-ceiling glass. European oak grounds each room. Stone and timber echo the landscape just beyond the balcony. These are not spec units dressed up for a brochure; they are homes shaped by how people actually cook, gather, rest, and recharge in the mountains.</p>
+    </div>
+  </section>
+
+  <!-- ===== RESIDENCE GALLERY ===== -->
+  <section class="residence-gallery" id="residences">
+    <div class="residence-gallery-header reveal">
+      <span class="section-label">Residence Collection</span>
+      <svg class="wavy-divider" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg" style="margin-left:auto;margin-right:auto;">
+        <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#C4A97D" stroke-width="1.2"/>
+      </svg>
+      <h2 class="section-title">Find Your Fit</h2>
+    </div>
+
+    <!-- 1 Bedroom -->
+    <div class="residence-item reveal">
+      <div class="residence-floorplan">
+        <img src="images/floorplan-1br.jpg" alt="1 Bedroom Floor Plan" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=residence-floorplan-placeholder>Floor Plan — 1 Bedroom</div>'">
+      </div>
+      <div class="residence-details">
+        <p class="residence-type-label">One Bedroom</p>
+        <h3 class="residence-name">The Suite</h3>
+        <div class="residence-specs">
+          <div class="spec-item"><span class="spec-value">877</span><span class="spec-label">Sq Ft</span></div>
+          <div class="spec-item"><span class="spec-value">1</span><span class="spec-label">Bedroom</span></div>
+          <div class="spec-item"><span class="spec-value">1</span><span class="spec-label">Bath</span></div>
+        </div>
+        <p class="residence-price">From $1,275,000</p>
+        <p class="residence-desc">A refined pied-a-terre designed for efficiency and elegance. Open-concept living flows to a private balcony with electric fireplace, perfect for weekend retreats or lock-and-leave mountain living.</p>
+        <ul class="residence-features">
+          <li>Open-concept floor plan</li>
+          <li>Private balcony</li>
+          <li>Electric fireplace</li>
+          <li>Walk-in closet</li>
+          <li>In-unit W/D</li>
+          <li>Wine cooler</li>
+          <li>2 garage spaces</li>
+          <li>Central air</li>
+        </ul>
+        <a href="contact.html" class="btn btn-gold">
+          Register for Pricing
+          <svg class="arrow-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 2 Bedroom -->
+    <div class="residence-item reverse reveal">
+      <div class="residence-floorplan">
+        <img src="images/floorplan-2br-b.jpg" alt="2 Bedroom Floor Plan" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=residence-floorplan-placeholder>Floor Plan — 2 Bedroom</div>'">
+      </div>
+      <div class="residence-details">
+        <p class="residence-type-label">Two Bedroom</p>
+        <h3 class="residence-name">The Nordic</h3>
+        <div class="residence-specs">
+          <div class="spec-item"><span class="spec-value">1,348</span><span class="spec-label">Sq Ft</span></div>
+          <div class="spec-item"><span class="spec-value">2</span><span class="spec-label">Bedrooms</span></div>
+          <div class="spec-item"><span class="spec-value">2</span><span class="spec-label">Baths</span></div>
+        </div>
+        <p class="residence-price">From $2,150,000</p>
+        <p class="residence-desc">An alternative two-bedroom design with a distinctive layout offering natural light and mountain views from a private balcony. Arrigoni hardwood floors, contemporary finishes, and a thoughtfully planned kitchen anchor the space.</p>
+        <ul class="residence-features">
+          <li>Arrigoni hardwood floors</li>
+          <li>Primary suite with W.I.C.</li>
+          <li>Spa-style primary bath</li>
+          <li>78 SF private balcony</li>
+          <li>In-unit W/D</li>
+          <li>Owner's storage</li>
+          <li>2 garage spaces</li>
+          <li>Central air</li>
+        </ul>
+        <a href="contact.html" class="btn btn-gold">
+          Register for Pricing
+          <svg class="arrow-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 3 Bedroom -->
+    <div class="residence-item reveal">
+      <div class="residence-floorplan">
+        <img src="images/floorplan-3br.jpg" alt="3 Bedroom Floor Plan" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=residence-floorplan-placeholder>Floor Plan — 3 Bedroom</div>'">
+      </div>
+      <div class="residence-details">
+        <p class="residence-type-label">Three Bedroom</p>
+        <h3 class="residence-name">The Lodge</h3>
+        <div class="residence-specs">
+          <div class="spec-item"><span class="spec-value">1,738</span><span class="spec-label">Sq Ft</span></div>
+          <div class="spec-item"><span class="spec-value">3</span><span class="spec-label">Bedrooms</span></div>
+          <div class="spec-item"><span class="spec-value">3</span><span class="spec-label">Baths</span></div>
+        </div>
+        <p class="residence-price">From $2,995,000</p>
+        <p class="residence-desc">A generous three-bedroom layout that bridges the gap between mountain retreat and family home. Designer finishes, a chef-inspired kitchen with wine cooler, and an expansive private balcony make this the sweet spot of the collection.</p>
+        <ul class="residence-features">
+          <li>Chef-inspired kitchen</li>
+          <li>Wine cooler</li>
+          <li>Private balcony</li>
+          <li>Wood &amp; tile flooring</li>
+          <li>In-unit W/D</li>
+          <li>Owner's storage</li>
+          <li>2 garage spaces</li>
+          <li>Central air</li>
+        </ul>
+        <a href="contact.html" class="btn btn-gold">
+          Register for Pricing
+          <svg class="arrow-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 4 Bedroom -->
+    <div class="residence-item reverse reveal">
+      <div class="residence-floorplan">
+        <img src="images/floorplan-4br.jpg" alt="4 Bedroom Floor Plan" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=residence-floorplan-placeholder>Floor Plan — 4 Bedroom</div>'">
+      </div>
+      <div class="residence-details">
+        <p class="residence-type-label">Four Bedroom</p>
+        <h3 class="residence-name">The Summit</h3>
+        <div class="residence-specs">
+          <div class="spec-item"><span class="spec-value">2,457</span><span class="spec-label">Sq Ft</span></div>
+          <div class="spec-item"><span class="spec-value">4</span><span class="spec-label">Bedrooms</span></div>
+          <div class="spec-item"><span class="spec-value">3</span><span class="spec-label">Baths</span></div>
+        </div>
+        <p class="residence-price">From $4,195,000</p>
+        <p class="residence-desc">An expansive four-bedroom residence with generous primary suite, junior bedroom, and separate storage and pantry. The open living, dining, and chef's kitchen create an ideal gathering space for family and entertaining.</p>
+        <ul class="residence-features">
+          <li>Expansive primary suite</li>
+          <li>Junior bedroom with bath</li>
+          <li>Walk-in closets throughout</li>
+          <li>Balcony with views</li>
+          <li>Dedicated storage room</li>
+          <li>Walk-in pantry</li>
+          <li>2 garage spaces</li>
+          <li>Central air</li>
+        </ul>
+        <a href="contact.html" class="btn btn-gold">
+          Register for Pricing
+          <svg class="arrow-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- 5 Bedroom + Office -->
+    <div class="residence-item reveal">
+      <div class="residence-floorplan">
+        <img src="images/floorplan-5br.jpg" alt="5 Bedroom + Office Floor Plan" onerror="this.style.display='none';this.parentElement.innerHTML='<div class=residence-floorplan-placeholder>Floor Plan — 5 Bedroom + Office</div>'">
+      </div>
+      <div class="residence-details">
+        <p class="residence-type-label">Five Bedroom + Office</p>
+        <h3 class="residence-name">The Penthouse</h3>
+        <div class="residence-specs">
+          <div class="spec-item"><span class="spec-value">3,093</span><span class="spec-label">Sq Ft</span></div>
+          <div class="spec-item"><span class="spec-value">5</span><span class="spec-label">Bedrooms</span></div>
+          <div class="spec-item"><span class="spec-value">5</span><span class="spec-label">Baths</span></div>
+        </div>
+        <p class="residence-price">From $6,495,000</p>
+        <p class="residence-desc">The crown of Skjol. This flagship residence features five bedrooms including a bunk room, a dedicated home office, and dual balconies capturing panoramic mountain views. The ultimate expression of alpine luxury.</p>
+        <ul class="residence-features">
+          <li>Grand primary suite</li>
+          <li>Bunk room for families</li>
+          <li>Private home office</li>
+          <li>Dual balconies</li>
+          <li>Electric fireplace</li>
+          <li>Walk-in closets throughout</li>
+          <li>2 garage spaces</li>
+          <li>Central air</li>
+        </ul>
+        <a href="contact.html" class="btn btn-gold">
+          Register for Pricing
+          <svg class="arrow-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURES SECTION ===== -->
+  <section class="features-section">
+    <div class="features-inner">
+      <div class="features-content reveal">
+        <span class="section-label">Interior Details</span>
+        <svg class="wavy-divider" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#3D3D5C" stroke-width="1.2"/>
+        </svg>
+        <h2 class="section-title">Thoughtfully<br>Appointed</h2>
+        <ul class="features-list">
+          <li>Arrigoni hardwood floors</li>
+          <li>Chef's kitchen with premium appliances</li>
+          <li>European-inspired cabinetry</li>
+          <li>Wine cooler in every residence</li>
+          <li>In-unit washer &amp; dryer</li>
+          <li>Private balcony or patio</li>
+          <li>Heated underground parking</li>
+          <li>Forced air heating &amp; central A/C</li>
+        </ul>
+      </div>
+      <div class="features-image reveal">Rendering — Interior Detail</div>
+    </div>
+  </section>
+
+  <!-- ===== BUILDING HIGHLIGHTS ===== -->
+  <section class="highlights-strip">
+    <div class="highlights-inner">
+      <div class="highlight-item reveal">
+        <div class="highlight-value">6</div>
+        <div class="highlight-label">Stories</div>
+      </div>
+      <div class="highlight-item reveal">
+        <div class="highlight-value">108</div>
+        <div class="highlight-label">Residences</div>
+      </div>
+      <div class="highlight-item reveal">
+        <div class="highlight-value">877–3,093</div>
+        <div class="highlight-label">Square Feet</div>
+      </div>
+      <div class="highlight-item reveal">
+        <div class="highlight-value">2</div>
+        <div class="highlight-label">Garage Spaces</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA SECTION ===== -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <span class="section-label reveal">Priority Access</span>
+      <svg class="wavy-divider reveal" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg" style="margin-left:auto;margin-right:auto;">
+        <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#C4A97D" stroke-width="1.2"/>
+      </svg>
+      <h2 class="section-title reveal">Reserve Your Residence</h2>
+      <p class="cta-sub reveal">Join our priority list to secure founders pricing and first choice of residence. Our team will guide you through available floor plans, finishes, and the selection process.</p>
+      <div class="cta-actions reveal">
+        <a href="contact.html" class="btn btn-gold">
+          Register Now
+          <svg class="arrow-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#" class="cta-lookbook">
+          <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1v12M3 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Download Lookbook
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="footer-brand-logo" src="images/logo-transparent.png" alt="Skjól">
+        <p class="footer-tagline">A modern sanctuary for mountain souls</p>
+        <div class="footer-contact">
+          <p><a href="mailto:info@skjolavon.com">info@skjolavon.com</a></p>
+          <p><a href="tel:9705474000">(970) 547-4000</a></p>
+        </div>
+      </div>
+      <div>
+        <p class="footer-nav-title">Explore</p>
+        <ul class="footer-nav-links">
+          <li><a href="residences.html">Residences</a></li>
+          <li><a href="amenities.html">Amenities</a></li>
+          <li><a href="location.html">Location</a></li>
+          <li><a href="vision.html">The Vision</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-nav-title">Connect</p>
+        <ul class="footer-nav-links">
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="contact.html">Register</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-legal">All renderings, floor plans, amenities, and pricing are conceptual and subject to change without notice. This is not an offer to sell or a solicitation of an offer to buy in any jurisdiction where such offer or solicitation would be unlawful. Skjol Avon is developed by its respective ownership entities. Equal Housing Opportunity. &copy; 2026 Skjol Avon. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Sticky nav scroll behavior
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+    // Start scrolled since hero is shorter on subpages
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+      document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    });
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // Rune glow — letter-by-letter unveil
+    function initRuneGlow() {
+      // Tag elements that should glow
+      var isMobile = window.innerWidth <= 900;
+      var glowSelector = isMobile
+        ? '.nav-links a, .mobile-nav a:not(.nav-cta), .footer-nav-links a, .footer-contact a, .nav-logo-text'
+        : '.nav-links a, .mobile-nav a:not(.nav-cta), .footer-nav-links a, .footer-contact a, .nav-logo-text, .page-hero-title, .hero-headline';
+      document.querySelectorAll(glowSelector).forEach(el => {
+        el.classList.add('rune-text');
+      });
+      document.querySelectorAll('.nav-logo').forEach(el => el.classList.add('rune-hover'));
+
+      // Split text into individual character spans with staggered delay
+      document.querySelectorAll('.rune-text').forEach(el => {
+        if (el.dataset.rune) return;
+        el.dataset.rune = '1';
+        const text = el.textContent;
+        el.innerHTML = '';
+        [...text].forEach((ch, i) => {
+          const s = document.createElement('span');
+          s.textContent = ch === ' ' ? ' ' : ch;
+          s.style.transitionDelay = i * 40 + 'ms';
+          el.appendChild(s);
+        });
+      });
+    }
+    initRuneGlow();
+
+    // Floating rune particles
+    (function initHeroParticles() {
+      const container = document.getElementById('heroParticles');
+      if (!container) return;
+      const runeChars = ['ᚺ','ᚲ','ᛇ','ᛁ','ᚠ','ᚱ','ᛉ','ᛚ','ᛏ','ᛒ'];
+      for (let i = 0; i < 20; i++) {
+        const p = document.createElement('span');
+        p.className = 'rune-particle';
+        p.textContent = runeChars[Math.floor(Math.random() * runeChars.length)];
+        p.style.left = Math.random() * 100 + '%';
+        p.style.bottom = -(Math.random() * 40) + 'px';
+        p.style.fontSize = (14 + Math.random() * 18) + 'px';
+        p.style.color = Math.random() > 0.5 ? 'rgba(126,200,227,0.55)' : 'rgba(196,169,125,0.45)';
+        p.style.animationDuration = (4 + Math.random() * 6) + 's';
+        p.style.animationDelay = (Math.random() * 5) + 's';
+        container.appendChild(p);
+      }
+    })();
+  </script>
+
+</body>
+</html>

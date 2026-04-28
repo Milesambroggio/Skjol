@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Skjol Avon</title>
+  <meta name="description" content="Connect with Skjol Avon. Register for priority access, schedule a private tour, or learn more about luxury mountain living between Vail and Beaver Creek.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== DESIGN TOKENS ===== */
+    :root {
+      --navy: #3D3D5C;
+      --navy-light: #4A4A6A;
+      --navy-dark: #2D2D45;
+      --purple-mist: #8B7BA8;
+      --cream: #F5F0EB;
+      --cream-light: #FAF8F5;
+      --white: #FFFFFF;
+      --gold: #C4A97D;
+      --gold-light: #D4BE9A;
+      --text-dark: #2A2A3E;
+      --text-body: #555566;
+      --text-light: #888899;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      --rune-glow: #7EC8E3;
+      --rune-glow-rgb: 126, 200, 227;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--text-dark); background: var(--white); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== SHARED TYPOGRAPHY ===== */
+    .section-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--purple-mist);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: 44px;
+      font-weight: 400;
+      color: var(--text-dark);
+      line-height: 1.15;
+    }
+    .wavy-divider {
+      display: block;
+      margin: 18px 0 24px;
+      width: 80px;
+      height: 8px;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .btn-primary { background: var(--navy); color: var(--white); }
+    .btn-primary:hover { background: var(--navy-dark); }
+    .btn-gold { background: var(--gold); color: var(--white); }
+    .btn-gold:hover { background: var(--gold-light); }
+    .btn-secondary { background: transparent; border: 1.5px solid var(--white); color: var(--white); }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+    .btn-outline { background: transparent; border: 1.5px solid var(--navy); color: var(--navy); }
+    .btn-outline:hover { background: var(--navy); color: var(--white); }
+    .arrow-icon { transition: transform 0.3s ease; }
+    .btn:hover .arrow-icon { transform: translateX(3px); }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 50px;
+      transition: all 0.4s ease;
+    }
+    .nav.scrolled {
+      background: rgba(45, 45, 69, 0.97);
+      padding: 14px 50px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 12px; }
+    .nav-logo img { width: 38px; height: auto; transition: all 0.3s ease; }
+    .nav.scrolled .nav-logo img { width: 30px; height: auto; }
+    .nav-logo-text {
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--white);
+      transition: all 0.3s ease;
+    }
+    .nav-logo:hover .nav-logo-text {
+      color: var(--rune-glow);
+    }
+    .nav-links { display: flex; align-items: center; gap: 32px; list-style: none; }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      transition: all 0.3s ease;
+    }
+    .nav-links a:hover {
+      color: var(--rune-glow);
+    }
+    .nav-cta {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--gold);
+      padding: 10px 24px;
+      transition: all 0.3s ease;
+    }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span { display: block; width: 24px; height: 2px; background: var(--white); transition: all 0.3s ease; }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* Mobile nav overlay */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 999;
+      background: rgba(45, 45, 69, 0.98);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--white);
+      transition: all 0.3s ease;
+    }
+    .mobile-nav a:hover {
+      color: var(--rune-glow);
+    }
+    .mobile-nav .nav-cta { margin-top: 12px; padding: 14px 36px; }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      position: relative;
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--navy-dark);
+    }
+    .page-hero-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(180deg, rgba(26,26,46,0.82) 0%, rgba(45,45,69,0.7) 50%, rgba(45,45,69,0.88) 100%);
+      z-index: 0;
+    }
+    /* Aurora borealis effect */
+    .page-hero-aurora {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 70%;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at 25% 0%, rgba(126,200,227,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 0%, rgba(139,123,168,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 20%, rgba(196,169,125,0.06) 0%, transparent 45%);
+      animation: auroraShift 10s ease-in-out infinite alternate;
+    }
+    @keyframes auroraShift {
+      0% { opacity: 0.6; transform: translateX(-3%) scaleY(1); }
+      50% { opacity: 1; transform: translateX(2%) scaleY(1.05); }
+      100% { opacity: 0.7; transform: translateX(3%) scaleY(0.95); }
+    }
+    /* Floating rune particles */
+    .page-hero-particles {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .rune-particle {
+      position: absolute;
+      opacity: 0;
+      animation: runeFloat linear infinite;
+    }
+    @keyframes runeFloat {
+      0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { opacity: 0; transform: translateY(-220px) rotate(45deg); }
+    }
+    /* Decorative rune border */
+    .page-hero-rune-border {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      z-index: 1;
+      background: linear-gradient(90deg, transparent, rgba(126,200,227,0.3), rgba(196,169,125,0.4), rgba(126,200,227,0.3), transparent);
+    }
+    .page-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      padding: 0 24px;
+    }
+    .page-hero-title {
+      font-family: var(--serif);
+      font-size: 56px;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .page-hero-sub {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* ===== CONTACT LAYOUT ===== */
+    .contact-section {
+      padding: 100px 50px;
+      background: var(--cream-light);
+    }
+    .contact-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    /* ===== REGISTRATION FORM ===== */
+    .contact-form-wrapper {
+      background: var(--white);
+      padding: 48px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+    }
+    .contact-form-wrapper .section-label { margin-bottom: 8px; }
+    .contact-form-wrapper .section-title { font-size: 36px; margin-bottom: 8px; }
+    .form-subtitle {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.6;
+      margin-bottom: 32px;
+    }
+    .contact-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .contact-form .full-width { grid-column: 1 / -1; }
+    .form-field input,
+    .form-field select,
+    .form-field textarea {
+      width: 100%;
+      font-family: var(--sans);
+      font-size: 14px;
+      padding: 14px 18px;
+      border: 1px solid #ddd;
+      background: var(--white);
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.3s ease;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    .form-field select {
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23888899' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 16px center;
+      padding-right: 40px;
+    }
+    .form-field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .form-field input:focus,
+    .form-field select:focus,
+    .form-field textarea:focus {
+      border-color: var(--gold);
+    }
+    .form-field input::placeholder,
+    .form-field textarea::placeholder {
+      color: var(--text-light);
+      font-weight: 400;
+    }
+
+    /* Radio group */
+    .form-group-label {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--text-body);
+      margin-bottom: 12px;
+    }
+    .radio-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text-body);
+      cursor: pointer;
+      padding: 8px 14px;
+      border: 1px solid #ddd;
+      transition: all 0.3s ease;
+    }
+    .radio-group label:hover { border-color: var(--gold-light); }
+    .radio-group input[type="radio"] {
+      width: 16px;
+      height: 16px;
+      accent-color: var(--gold);
+    }
+    .radio-group input[type="radio"]:checked + span { color: var(--navy); font-weight: 500; }
+    .radio-group label:has(input:checked) { border-color: var(--gold); background: rgba(196,169,125,0.05); }
+
+    /* Checkbox */
+    .checkbox-field {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      margin-top: 4px;
+    }
+    .checkbox-field input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--gold);
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+    .checkbox-field label {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text-body);
+      line-height: 1.5;
+      cursor: pointer;
+    }
+    .form-submit {
+      margin-top: 8px;
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* ===== SIDEBAR ===== */
+    .contact-sidebar {}
+    .sidebar-card {
+      background: var(--white);
+      padding: 36px;
+      box-shadow: 0 4px 30px rgba(0,0,0,0.06);
+      margin-bottom: 24px;
+    }
+    .sidebar-card-title {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 20px;
+    }
+    .sidebar-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 18px;
+    }
+    .sidebar-item:last-child { margin-bottom: 0; }
+    .sidebar-icon {
+      width: 20px;
+      height: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .sidebar-item-content p {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+    .sidebar-item-content a {
+      color: var(--gold);
+      transition: color 0.3s ease;
+    }
+    .sidebar-item-content a:hover { color: var(--navy); }
+    .sidebar-item-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-light);
+      margin-bottom: 4px;
+    }
+
+    /* Broker card */
+    .broker-card {
+      background: var(--navy);
+      padding: 36px;
+      color: var(--white);
+    }
+    .broker-card .sidebar-card-title { color: var(--white); }
+    .broker-card p {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
+    .broker-card .btn-secondary { font-size: 11px; }
+
+    /* ===== FAQ SECTION ===== */
+    .faq-section {
+      padding: 100px 50px;
+      background: var(--white);
+    }
+    .faq-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .faq-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .faq-header .wavy-divider { margin-left: auto; margin-right: auto; }
+    .faq-item {
+      border-bottom: 1px solid #eee;
+    }
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 24px 0;
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+    }
+    .faq-question span {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text-dark);
+      line-height: 1.4;
+    }
+    .faq-question svg {
+      width: 16px;
+      height: 16px;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    .faq-item.open .faq-question svg { transform: rotate(180deg); }
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+    }
+    .faq-item.open .faq-answer {
+      max-height: 300px;
+      padding-bottom: 24px;
+    }
+    .faq-answer p {
+      font-family: var(--sans);
+      font-size: 14px;
+      color: var(--text-body);
+      line-height: 1.8;
+    }
+
+    /* ===== CTA SECTION ===== */
+    .cta-section {
+      padding: 80px 50px;
+      background: var(--navy-dark);
+      text-align: center;
+    }
+    .cta-section .section-title { color: var(--white); margin-bottom: 16px; }
+    .cta-sub {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 36px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--navy-dark);
+      padding: 60px 50px 36px;
+      color: rgba(255,255,255,0.6);
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand-logo { width: 44px; height: auto; margin-bottom: 16px; }
+    .footer-tagline {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-style: italic;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 20px;
+    }
+    .footer-contact p { font-family: var(--sans); font-size: 13px; line-height: 2; }
+    .footer-contact a { color: var(--gold-light); transition: all 0.3s ease; }
+    .footer-contact a:hover {
+      color: var(--rune-glow);
+    }
+    .footer-nav-title {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 18px;
+    }
+    .footer-nav-links { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .footer-nav-links a {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      transition: all 0.3s ease;
+    }
+    .footer-nav-links a:hover {
+      color: var(--rune-glow);
+    }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+    }
+    .footer-legal {
+      font-family: var(--sans);
+      font-size: 11px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ===== RUNE GLOW — LETTER BY LETTER ===== */
+    .rune-text span {
+      display: inline-block;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .rune-text:hover span,
+    .rune-hover:hover .rune-text span {
+      color: var(--rune-glow);
+      text-shadow: 0 0 7px rgba(var(--rune-glow-rgb), 0.8), 0 0 20px rgba(var(--rune-glow-rgb), 0.4), 0 0 40px rgba(var(--rune-glow-rgb), 0.2);
+    }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .nav { padding: 16px 24px; }
+      .nav.scrolled { padding: 12px 24px; }
+      .nav-links, .nav > .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .page-hero-title { font-size: 38px; }
+      .section-title { font-size: 34px; }
+
+      .contact-section { padding: 64px 24px; }
+      .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .contact-form-wrapper { padding: 32px 24px; }
+      .contact-form { grid-template-columns: 1fr; }
+
+      .faq-section { padding: 64px 24px; }
+      .cta-section { padding: 64px 24px; }
+
+      .footer { padding: 48px 24px 28px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 480px) {
+      .page-hero-title { font-size: 30px; }
+      .radio-group { flex-direction: column; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav" id="mainNav">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo-transparent.png" alt="Skjól">
+      <span class="nav-logo-text">Skjol</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="residences.html">Residences</a></li>
+      <li><a href="amenities.html">Amenities</a></li>
+      <li><a href="location.html">Location</a></li>
+      <li><a href="vision.html">The Vision</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Register</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="residences.html" onclick="closeMobile()">Residences</a>
+    <a href="amenities.html" onclick="closeMobile()">Amenities</a>
+    <a href="location.html" onclick="closeMobile()">Location</a>
+    <a href="vision.html" onclick="closeMobile()">The Vision</a>
+    <a href="contact.html" onclick="closeMobile()">Contact</a>
+    <a href="contact.html" class="nav-cta" onclick="closeMobile()">Register Now</a>
+  </div>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="page-hero" style="background-image: url('images/season-winter.jpg');">
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-aurora"></div>
+    <div class="page-hero-particles" id="heroParticles"></div>
+    <div class="page-hero-rune-border"></div>
+    <div class="page-hero-content">
+      <p class="page-hero-sub">Get In Touch</p>
+      <h1 class="page-hero-title">Connect With Us</h1>
+    </div>
+  </section>
+
+  <!-- ===== CONTACT + FORM SECTION ===== -->
+  <section class="contact-section">
+    <div class="contact-grid">
+
+      <!-- Left: Registration Form -->
+      <div class="contact-form-wrapper reveal">
+        <span class="section-label">Priority Registration</span>
+        <svg class="wavy-divider" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#C4A97D" stroke-width="1.2"/>
+        </svg>
+        <h2 class="section-title">Register Your Interest</h2>
+        <p class="form-subtitle">Join our priority list for exclusive founders pricing, early floor plan access, and private preview invitations.</p>
+
+        <form class="contact-form" id="contactForm" action="https://formsubmit.co/info@skjolavon.com" method="POST">
+          <!-- Security: honeypot to block spam bots -->
+          <input type="text" name="_honey" style="display:none">
+          <!-- Stay on our site after submit -->
+          <input type="hidden" name="_next" value="https://milesambroggio.github.io/Skjol/contact.html?submitted=true">
+          <!-- Email subject line -->
+          <input type="hidden" name="_subject" value="New Skjol Registration Inquiry">
+          <!-- Disable default captcha page -->
+          <input type="hidden" name="_captcha" value="false">
+          <!-- Send as formatted table -->
+          <input type="hidden" name="_template" value="table">
+          <div class="form-field">
+            <input type="text" name="firstName" placeholder="First Name *" required>
+          </div>
+          <div class="form-field">
+            <input type="text" name="lastName" placeholder="Last Name *" required>
+          </div>
+          <div class="form-field">
+            <input type="email" name="email" placeholder="Email Address *" required>
+          </div>
+          <div class="form-field">
+            <input type="tel" name="phone" placeholder="Phone Number">
+          </div>
+          <div class="form-field">
+            <input type="text" name="city" placeholder="City">
+          </div>
+          <div class="form-field">
+            <select name="state">
+              <option value="" disabled selected>State</option>
+              <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
+              <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
+              <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+              <option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option>
+              <option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option>
+              <option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+              <option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
+              <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
+              <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+              <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
+              <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
+              <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
+              <option>Wisconsin</option><option>Wyoming</option>
+            </select>
+          </div>
+          <div class="form-field full-width">
+            <select name="country">
+              <option value="" disabled selected>Country</option>
+              <option selected>United States</option>
+              <option>Canada</option><option>United Kingdom</option><option>Australia</option>
+              <option>Mexico</option><option>Other</option>
+            </select>
+          </div>
+
+          <div class="full-width" style="margin-top: 8px;">
+            <p class="form-group-label">How did you hear about Skjol?</p>
+            <div class="radio-group">
+              <label><input type="radio" name="source" value="search"><span>Online Search</span></label>
+              <label><input type="radio" name="source" value="social"><span>Social Media</span></label>
+              <label><input type="radio" name="source" value="referral"><span>Referral</span></label>
+              <label><input type="radio" name="source" value="broker"><span>Real Estate Broker</span></label>
+              <label><input type="radio" name="source" value="print"><span>Print / Advertisement</span></label>
+              <label><input type="radio" name="source" value="other"><span>Other</span></label>
+            </div>
+          </div>
+
+          <div class="form-field full-width" style="margin-top: 8px;">
+            <textarea name="questions" placeholder="Questions or comments..."></textarea>
+          </div>
+
+          <div class="full-width">
+            <div class="checkbox-field">
+              <input type="checkbox" id="brokerCheck" name="isBroker">
+              <label for="brokerCheck">I am a licensed real estate broker or agent inquiring on behalf of a client</label>
+            </div>
+          </div>
+
+          <div class="full-width">
+            <button type="submit" class="btn btn-gold form-submit">
+              Submit Registration
+              <svg class="arrow-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Right: Sidebar -->
+      <div class="contact-sidebar">
+        <!-- Contact Info Card -->
+        <div class="sidebar-card reveal">
+          <h3 class="sidebar-card-title">Contact Information</h3>
+          <div class="sidebar-item">
+            <svg class="sidebar-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 4h14a1 1 0 011 1v10a1 1 0 01-1 1H3a1 1 0 01-1-1V5a1 1 0 011-1z" stroke="#C4A97D" stroke-width="1.2"/>
+              <path d="M2 5l8 5 8-5" stroke="#C4A97D" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            <div class="sidebar-item-content">
+              <p class="sidebar-item-label">Email</p>
+              <p><a href="mailto:info@skjolavon.com">info@skjolavon.com</a></p>
+            </div>
+          </div>
+          <div class="sidebar-item">
+            <svg class="sidebar-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M3 3h4l2 5-2.5 1.5A11 11 0 0011.5 14.5L13 12l5 2v4a1 1 0 01-1 1A16 16 0 012 3a1 1 0 011-1z" stroke="#C4A97D" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="sidebar-item-content">
+              <p class="sidebar-item-label">Phone</p>
+              <p><a href="tel:9705474000">(970) 547-4000</a></p>
+            </div>
+          </div>
+          <div class="sidebar-item">
+            <svg class="sidebar-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M10 11a3 3 0 100-6 3 3 0 000 6z" stroke="#C4A97D" stroke-width="1.2"/>
+              <path d="M10 19s-7-5.75-7-11a7 7 0 1114 0c0 5.25-7 11-7 11z" stroke="#C4A97D" stroke-width="1.2"/>
+            </svg>
+            <div class="sidebar-item-content">
+              <p class="sidebar-item-label">Address</p>
+              <p>Avon, Colorado 81620<br>Vail Valley</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sales Gallery Card -->
+        <div class="sidebar-card reveal">
+          <h3 class="sidebar-card-title">Sales Gallery</h3>
+          <div class="sidebar-item">
+            <svg class="sidebar-icon" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="10" cy="10" r="8" stroke="#C4A97D" stroke-width="1.2"/>
+              <path d="M10 5v5l3 3" stroke="#C4A97D" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            <div class="sidebar-item-content">
+              <p class="sidebar-item-label">Hours</p>
+              <p>Monday - Saturday: 10am - 5pm<br>Sunday: By Appointment</p>
+            </div>
+          </div>
+          <p style="font-family: var(--sans); font-size: 13px; color: var(--text-body); line-height: 1.6; margin-top: 12px;">Private tours available by appointment. Contact us to schedule your visit to the Skjol preview gallery.</p>
+        </div>
+
+        <!-- Broker Card -->
+        <div class="broker-card reveal">
+          <h3 class="sidebar-card-title">For Real Estate Professionals</h3>
+          <p>We welcome broker partnerships. Our team offers dedicated support, co-op commissions, and private client previews for qualified brokers.</p>
+          <a href="mailto:brokers@skjolavon.com" class="btn btn-secondary">
+            Broker Inquiries
+            <svg class="arrow-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FAQ SECTION ===== -->
+  <section class="faq-section">
+    <div class="faq-inner">
+      <div class="faq-header reveal">
+        <span class="section-label">Common Questions</span>
+        <svg class="wavy-divider" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg" style="margin-left:auto;margin-right:auto;">
+          <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#3D3D5C" stroke-width="1.2"/>
+        </svg>
+        <h2 class="section-title">Frequently Asked Questions</h2>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>When is Skjol expected to be completed?</span>
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6l4 4 4-4" stroke="#3D3D5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Construction is anticipated to begin in 2026 with an estimated completion in late 2027. Timelines may adjust based on permitting and construction progress. Registered buyers will receive regular development updates.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>How does the reservation process work?</span>
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6l4 4 4-4" stroke="#3D3D5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Start by registering on our website. Our sales team will contact you with available residences, pricing, and floor plans. Priority registrants receive early access to unit selection and exclusive founders pricing before the general public.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Can I rent out my residence when I'm not using it?</span>
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6l4 4 4-4" stroke="#3D3D5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Yes. Skjol is designed to support both full-time residents and owners who wish to participate in a short-term rental program. The Vail Valley's strong tourism market makes rentals a compelling investment opportunity. Details on rental management services will be shared with registered buyers.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>What are the estimated HOA fees?</span>
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6l4 4 4-4" stroke="#3D3D5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>HOA fees will cover building maintenance, common area upkeep, amenity access, snow removal, and building insurance. Estimated fees will be provided during the reservation process and will vary by unit size and type.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Is financing available?</span>
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6l4 4 4-4" stroke="#3D3D5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Yes. We work with several preferred lenders experienced in mountain resort financing. Our sales team can provide introductions and guidance on financing options tailored to your situation, including options for second homes and investment properties.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Are pets allowed?</span>
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6l4 4 4-4" stroke="#3D3D5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Skjol is a pet-friendly community. Specific pet policies including size and breed guidelines will be established by the HOA. Mountain living and pets go hand in hand, and we're designing with four-legged family members in mind.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>What finishes and inclusions come standard?</span>
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6l4 4 4-4" stroke="#3D3D5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Every residence features premium Scandinavian-inspired finishes including wide-plank oak flooring, quartz countertops, European cabinetry, premium appliance packages, and spa-inspired bathrooms. A complete specification sheet is available upon registration.</p>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Can I customize my residence?</span>
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 6l4 4 4-4" stroke="#3D3D5C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <div class="faq-answer">
+          <p>Early buyers may have the opportunity to select from curated finish packages and make certain layout modifications. Customization availability depends on timing relative to the construction schedule. Register early for the most flexibility.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BOTTOM CTA ===== -->
+  <section class="cta-section">
+    <div class="reveal">
+      <span class="section-label" style="color: var(--gold);">Begin Your Journey</span>
+      <h2 class="section-title">Ready to Discover Skjol?</h2>
+      <p class="cta-sub">Explore our residences, amenities, and the Vail Valley lifestyle that awaits.</p>
+      <a href="residences.html" class="btn btn-gold">
+        Explore Residences
+        <svg class="arrow-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="footer-brand-logo" src="images/logo-transparent.png" alt="Skjól">
+        <p class="footer-tagline">A modern sanctuary for mountain souls</p>
+        <div class="footer-contact">
+          <p><a href="mailto:info@skjolavon.com">info@skjolavon.com</a></p>
+          <p><a href="tel:9705474000">(970) 547-4000</a></p>
+        </div>
+      </div>
+      <div>
+        <p class="footer-nav-title">Explore</p>
+        <ul class="footer-nav-links">
+          <li><a href="residences.html">Residences</a></li>
+          <li><a href="amenities.html">Amenities</a></li>
+          <li><a href="location.html">Location</a></li>
+          <li><a href="vision.html">The Vision</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-nav-title">Connect</p>
+        <ul class="footer-nav-links">
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="contact.html">Register</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-legal">All renderings, floor plans, amenities, and pricing are conceptual and subject to change without notice. This is not an offer to sell or a solicitation of an offer to buy in any jurisdiction where such offer or solicitation would be unlawful. Skjol Avon is developed by its respective ownership entities. Equal Housing Opportunity. &copy; 2026 Skjol Avon. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Sticky nav scroll behavior
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+      document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    });
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // FAQ toggle
+    function toggleFaq(btn) {
+      const item = btn.parentElement;
+      const wasOpen = item.classList.contains('open');
+      // Close all
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      // Toggle clicked
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    // Show success message if redirected back after form submission
+    if (window.location.search.includes('submitted=true')) {
+      const form = document.getElementById('contactForm');
+      if (form) {
+        form.innerHTML = '<div style="text-align:center;padding:60px 20px;"><h3 style="font-family:var(--serif);font-size:28px;color:var(--navy);margin-bottom:16px;">Thank You for Registering</h3><p style="color:var(--text);font-size:16px;line-height:1.6;">Our team will be in touch shortly with exclusive founders pricing and early access details.</p></div>';
+      }
+    }
+
+    // Rune glow — letter-by-letter unveil
+    function initRuneGlow() {
+      // Tag elements that should glow
+      var isMobile = window.innerWidth <= 900;
+      var glowSelector = isMobile
+        ? '.nav-links a, .mobile-nav a:not(.nav-cta), .footer-nav-links a, .footer-contact a, .nav-logo-text'
+        : '.nav-links a, .mobile-nav a:not(.nav-cta), .footer-nav-links a, .footer-contact a, .nav-logo-text, .page-hero-title, .hero-headline';
+      document.querySelectorAll(glowSelector).forEach(el => {
+        el.classList.add('rune-text');
+      });
+      document.querySelectorAll('.nav-logo').forEach(el => el.classList.add('rune-hover'));
+
+      // Split text into individual character spans with staggered delay
+      document.querySelectorAll('.rune-text').forEach(el => {
+        if (el.dataset.rune) return;
+        el.dataset.rune = '1';
+        const text = el.textContent;
+        el.innerHTML = '';
+        [...text].forEach((ch, i) => {
+          const s = document.createElement('span');
+          s.textContent = ch === ' ' ? ' ' : ch;
+          s.style.transitionDelay = i * 40 + 'ms';
+          el.appendChild(s);
+        });
+      });
+    }
+    initRuneGlow();
+
+    // Floating rune particles
+    (function initHeroParticles() {
+      const container = document.getElementById('heroParticles');
+      if (!container) return;
+      const runeChars = ['ᚺ','ᚲ','ᛇ','ᛁ','ᚠ','ᚱ','ᛉ','ᛚ','ᛏ','ᛒ'];
+      for (let i = 0; i < 20; i++) {
+        const p = document.createElement('span');
+        p.className = 'rune-particle';
+        p.textContent = runeChars[Math.floor(Math.random() * runeChars.length)];
+        p.style.left = Math.random() * 100 + '%';
+        p.style.bottom = -(Math.random() * 40) + 'px';
+        p.style.fontSize = (14 + Math.random() * 18) + 'px';
+        p.style.color = Math.random() > 0.5 ? 'rgba(126,200,227,0.55)' : 'rgba(196,169,125,0.45)';
+        p.style.animationDuration = (4 + Math.random() * 6) + 's';
+        p.style.animationDelay = (Math.random() * 5) + 's';
+        container.appendChild(p);
+      }
+    })();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Skjól Avon — Vail Valley's Next Era of Luxury Living</title>
+  <meta name="description" content="108 luxury condominiums between Vail and Beaver Creek. 1-5 bedroom residences starting under $1.3M. Rooted in Scandinavian spirit, designed for modern mountain living.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== DESIGN TOKENS ===== */
+    :root {
+      --navy: #3D3D5C;
+      --navy-light: #4A4A6A;
+      --navy-dark: #2D2D45;
+      --purple-mist: #8B7BA8;
+      --cream: #F5F0EB;
+      --cream-light: #FAF8F5;
+      --white: #FFFFFF;
+      --gold: #C4A97D;
+      --gold-light: #D4BE9A;
+      --text-dark: #2A2A3E;
+      --text-body: #555566;
+      --text-light: #888899;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      --rune-glow: #7EC8E3;
+      --rune-glow-rgb: 126, 200, 227;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--text-dark); background: var(--white); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== SHARED TYPOGRAPHY ===== */
+    .section-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--purple-mist);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: 44px;
+      font-weight: 400;
+      color: var(--text-dark);
+      line-height: 1.15;
+    }
+    .wavy-divider {
+      display: block;
+      margin: 18px 0 24px;
+      width: 80px;
+      height: 8px;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .btn-primary {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--navy-dark); }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--white);
+    }
+    .btn-gold:hover { background: var(--gold-light); }
+    .btn-secondary {
+      background: transparent;
+      border: 1.5px solid var(--white);
+      color: var(--white);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--navy);
+      color: var(--navy);
+    }
+    .btn-outline:hover { background: var(--navy); color: var(--white); }
+    .btn-outline:hover svg path { stroke: var(--white); }
+    .arrow-icon { transition: transform 0.3s ease; }
+    .btn:hover .arrow-icon { transform: translateX(3px); }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 50px;
+      transition: all 0.4s ease;
+    }
+    .nav.scrolled {
+      background: rgba(45, 45, 69, 0.97);
+      padding: 14px 50px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-logo img { width: 38px; height: auto; transition: all 0.3s ease; }
+    .nav.scrolled .nav-logo img { width: 30px; height: auto; }
+    .nav-logo-text {
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--white);
+      transition: all 0.3s ease;
+    }
+    .nav-logo:hover .nav-logo-text { color: var(--rune-glow); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      transition: all 0.3s ease;
+    }
+    .nav-links a:hover { color: var(--rune-glow); }
+    .nav-cta {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--gold);
+      padding: 10px 24px;
+      transition: all 0.3s ease;
+    }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* Mobile nav overlay */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 999;
+      background: rgba(45, 45, 69, 0.98);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--white);
+      transition: all 0.3s ease;
+    }
+    .mobile-nav a:hover { color: var(--rune-glow); }
+    .mobile-nav .nav-cta {
+      margin-top: 12px;
+      padding: 14px 36px;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      object-fit: cover;
+    }
+    .hero-overlay {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      background: linear-gradient(180deg, rgba(26,26,46,0.7) 0%, rgba(45,45,69,0.5) 50%, rgba(61,61,92,0.6) 100%);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      padding: 0 24px;
+    }
+    .hero-logo { margin: 0 auto 32px; width: 72px; height: auto; }
+    .hero-headline {
+      font-family: var(--serif);
+      font-size: 56px;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .hero-sub {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      margin-bottom: 44px;
+    }
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1;
+      animation: bounceDown 2s infinite;
+    }
+    @keyframes bounceDown {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ===== VALUE PROP ===== */
+    .value-prop {
+      padding: 100px 50px;
+      background: var(--cream-light);
+    }
+    .value-prop-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 60px;
+      align-items: start;
+    }
+    .value-left {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .value-left .brand-logo { width: 56px; height: auto; margin-bottom: 20px; }
+    .value-tagline {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.25;
+      font-style: italic;
+    }
+    .value-right p {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--text-body);
+      margin-bottom: 18px;
+    }
+    .value-right p:last-child { margin-bottom: 0; }
+    .value-headline {
+      font-family: var(--serif);
+      font-size: 32px;
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1.25;
+      margin-bottom: 20px;
+    }
+    .value-pricing {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-top: 8px;
+    }
+
+    /* ===== KEY FACTS STRIP ===== */
+    .facts-strip {
+      background: var(--navy-dark);
+      padding: 48px 50px;
+    }
+    .facts-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+    .fact-item {}
+    .fact-number {
+      font-family: var(--serif);
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .fact-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+    }
+
+    /* ===== REGISTER CTA ===== */
+    .register-section {
+      padding: 100px 50px;
+      background: var(--cream);
+    }
+    .register-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .register-inner .section-title { margin-bottom: 12px; }
+    .register-sub {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+    .register-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .register-form input {
+      font-family: var(--sans);
+      font-size: 14px;
+      padding: 14px 18px;
+      border: 1px solid #ddd;
+      background: var(--white);
+      color: var(--text-dark);
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    .register-form input:focus {
+      border-color: var(--gold);
+    }
+    .register-form input::placeholder {
+      color: var(--text-light);
+      font-weight: 400;
+    }
+    .register-form .full-width {
+      grid-column: 1 / -1;
+    }
+    .register-submit {
+      width: 100%;
+      justify-content: center;
+    }
+    .register-lookbook {
+      margin-top: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--purple-mist);
+      transition: color 0.3s ease;
+    }
+    .register-lookbook:hover { color: var(--navy); }
+    .register-lookbook svg { width: 14px; height: 14px; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--navy-dark);
+      padding: 60px 50px 36px;
+      color: rgba(255,255,255,0.6);
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand-logo { width: 44px; height: auto; margin-bottom: 16px; }
+    .footer-tagline {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-style: italic;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 20px;
+    }
+    .footer-contact p {
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 2;
+    }
+    .footer-contact a {
+      color: var(--gold-light);
+      transition: all 0.3s ease;
+    }
+    .footer-contact a:hover { color: var(--rune-glow); }
+    .footer-nav-title {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 18px;
+    }
+    .footer-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-nav-links a {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      transition: all 0.3s ease;
+    }
+    .footer-nav-links a:hover { color: var(--rune-glow); }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+    }
+    .footer-legal {
+      font-family: var(--sans);
+      font-size: 11px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ===== RUNE GLOW — LETTER BY LETTER ===== */
+    .rune-text span {
+      display: inline-block;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .rune-text:hover span,
+    .rune-hover:hover .rune-text span {
+      color: var(--rune-glow);
+      text-shadow: 0 0 7px rgba(var(--rune-glow-rgb), 0.8), 0 0 20px rgba(var(--rune-glow-rgb), 0.4), 0 0 40px rgba(var(--rune-glow-rgb), 0.2);
+    }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .nav { padding: 16px 24px; }
+      .nav.scrolled { padding: 12px 24px; }
+      .nav-links, .nav > .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .hero-headline { font-size: 40px; }
+      .hero-sub { font-size: 12px; letter-spacing: 2px; }
+      .hero-ctas { flex-direction: column; }
+
+      .value-prop { padding: 64px 24px; }
+      .value-prop-inner { grid-template-columns: 1fr; gap: 32px; }
+
+      .facts-strip { padding: 40px 24px; }
+      .facts-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+
+      .register-section { padding: 64px 24px; }
+      .register-form { grid-template-columns: 1fr; }
+      .section-title { font-size: 34px; }
+
+      .footer { padding: 48px 24px 28px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-headline { font-size: 32px; }
+      .facts-inner { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav" id="mainNav">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo-transparent.png" alt="Skjól">
+      <span class="nav-logo-text">Skjol</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="residences.html">Residences</a></li>
+      <li><a href="amenities.html">Amenities</a></li>
+      <li><a href="location.html">Location</a></li>
+      <li><a href="vision.html">The Vision</a></li>
+    </ul>
+    <a href="#register" class="nav-cta">Register</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="residences.html" onclick="closeMobile()">Residences</a>
+    <a href="amenities.html" onclick="closeMobile()">Amenities</a>
+    <a href="location.html" onclick="closeMobile()">Location</a>
+    <a href="vision.html" onclick="closeMobile()">The Vision</a>
+    <a href="contact.html" onclick="closeMobile()">Contact</a>
+    <a href="#register" class="nav-cta" onclick="closeMobile()">Register Now</a>
+  </div>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero" id="hero">
+    <!-- Hero background image -->
+    <img class="hero-bg" src="images/hero.jpg" alt="Vail Valley mountain landscape">
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+      <img class="hero-logo" src="images/logo-transparent.png" alt="Skjól">
+      <h1 class="hero-headline">Unveiling What's Next <br>for the Vail Valley</h1>
+      <p class="hero-sub">108 Luxury Residences &middot; Avon, Colorado</p>
+      <div class="hero-ctas">
+        <a href="#register" class="btn btn-primary">
+          Register for Founders Pricing
+          <svg class="arrow-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="residences.html" class="btn btn-secondary">
+          Explore Residences
+          <svg class="arrow-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="hero-scroll">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 4v14M6 14l6 6 6-6" stroke="rgba(255,255,255,0.4)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ===== VALUE PROP ===== -->
+  <section class="value-prop" id="about">
+    <div class="value-prop-inner">
+      <div class="value-left reveal">
+        <img class="brand-logo" src="images/logo-background.png" alt="Skjól">
+        <p class="value-tagline">A modern sanctuary<br>for mountain souls</p>
+      </div>
+      <div class="value-right reveal">
+        <span class="section-label">The Vision</span>
+        <!-- Wavy divider -->
+        <svg class="wavy-divider" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#3D3D5C" stroke-width="1.2"/>
+        </svg>
+        <h2 class="value-headline">Unveiling What's Next for the Vail Valley</h2>
+        <p>Skjól is for those who have lived fully, traveled widely, enjoyed deeply. You seek something more refined, easeful, and meaningful in the Vail Valley.</p>
+        <p>Rooted in Scandinavian spirit, Skjól offers modern mountain living that feels effortless, personal, and carefully considered. Luxury here is not loud. It is intentional, found in thoughtful design, in spaces that adapt to how families actually live, and in amenities that bring people together.</p>
+        <p class="value-pricing">1-5 Bedroom Luxury Condominiums<br>Starting Under $1.3M</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== KEY FACTS STRIP ===== -->
+  <section class="facts-strip">
+    <div class="facts-inner">
+      <div class="fact-item reveal">
+        <div class="fact-number">108</div>
+        <div class="fact-label">Residences</div>
+      </div>
+      <div class="fact-item reveal">
+        <div class="fact-number">1-5</div>
+        <div class="fact-label">Bedrooms</div>
+      </div>
+      <div class="fact-item reveal">
+        <div class="fact-number">&lt;$1.3M</div>
+        <div class="fact-label">Starting Price</div>
+      </div>
+      <div class="fact-item reveal">
+        <div class="fact-number">2</div>
+        <div class="fact-label">World-Class Resorts</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== REGISTER CTA ===== -->
+  <section class="register-section" id="register">
+    <div class="register-inner">
+      <span class="section-label reveal">Priority Access</span>
+      <!-- Wavy divider -->
+      <svg class="wavy-divider reveal" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg" style="margin-left:auto;margin-right:auto;">
+        <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#C4A97D" stroke-width="1.2"/>
+      </svg>
+      <h2 class="section-title reveal">Begin Your Journey to Skjol</h2>
+      <p class="register-sub reveal">Register now for exclusive founders pricing and early access to residence selection.</p>
+      <form class="register-form reveal" id="homeRegisterForm" action="https://formsubmit.co/info@skjolavon.com" method="POST">
+        <!-- Security: honeypot to block spam bots -->
+        <input type="text" name="_honey" style="display:none">
+        <!-- Stay on our site after submit -->
+        <input type="hidden" name="_next" value="https://milesambroggio.github.io/Skjol/index.html?submitted=true">
+        <!-- Email subject line -->
+        <input type="hidden" name="_subject" value="New Skjol Homepage Registration">
+        <!-- Disable default captcha page -->
+        <input type="hidden" name="_captcha" value="false">
+        <!-- Send as formatted table -->
+        <input type="hidden" name="_template" value="table">
+        <input type="text" name="firstName" placeholder="First Name" required>
+        <input type="text" name="lastName" placeholder="Last Name" required>
+        <input type="email" name="email" placeholder="Email Address" required>
+        <input type="tel" name="phone" placeholder="Phone Number">
+        <input type="text" name="cityState" placeholder="City, State" class="full-width">
+        <button type="submit" class="btn btn-gold register-submit full-width">
+          Register Now
+          <svg class="arrow-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </form>
+      <a href="#" class="register-lookbook reveal">
+        <svg viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 1v12M3 9l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Download Lookbook
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="footer-brand-logo" src="images/logo-transparent.png" alt="Skjól">
+        <p class="footer-tagline">A modern sanctuary for mountain souls</p>
+        <div class="footer-contact">
+          <p><a href="mailto:info@skjolavon.com">info@skjolavon.com</a></p>
+          <p><a href="tel:9705474000">(970) 547-4000</a></p>
+        </div>
+      </div>
+      <div>
+        <p class="footer-nav-title">Explore</p>
+        <ul class="footer-nav-links">
+          <li><a href="residences.html">Residences</a></li>
+          <li><a href="amenities.html">Amenities</a></li>
+          <li><a href="location.html">Location</a></li>
+          <li><a href="vision.html">The Vision</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-nav-title">Connect</p>
+        <ul class="footer-nav-links">
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="#register">Register</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-legal">All renderings, floor plans, amenities, and pricing are conceptual and subject to change without notice. This is not an offer to sell or a solicitation of an offer to buy in any jurisdiction where such offer or solicitation would be unlawful. Skjol Avon is developed by its respective ownership entities. Equal Housing Opportunity. &copy; 2026 Skjol Avon. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Sticky nav scroll behavior
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+      document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    });
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // Show success message if redirected back after form submission
+    if (window.location.search.includes('submitted=true')) {
+      const form = document.getElementById('homeRegisterForm');
+      if (form) {
+        form.innerHTML = '<div style="text-align:center;padding:40px 20px;"><h3 style="font-family:var(--serif);font-size:24px;color:var(--white);margin-bottom:12px;">Thank You for Registering</h3><p style="color:rgba(255,255,255,0.8);font-size:16px;">Our team will be in touch shortly.</p></div>';
+      }
+    }
+
+    // Rune glow — letter-by-letter unveil
+    function initRuneGlow() {
+      // Tag elements that should glow
+      var isMobile = window.innerWidth <= 900;
+      // On mobile, skip hero headlines to prevent letter-split spacing issues
+      var glowSelector = isMobile
+        ? '.nav-links a, .mobile-nav a:not(.nav-cta), .footer-nav-links a, .footer-contact a, .nav-logo-text'
+        : '.nav-links a, .mobile-nav a:not(.nav-cta), .footer-nav-links a, .footer-contact a, .nav-logo-text, .page-hero-title, .hero-headline';
+      document.querySelectorAll(glowSelector).forEach(el => {
+        el.classList.add('rune-text');
+      });
+      document.querySelectorAll('.nav-logo').forEach(el => el.classList.add('rune-hover'));
+
+      // Split text into individual character spans with staggered delay, preserving <br>
+      document.querySelectorAll('.rune-text').forEach(el => {
+        if (el.dataset.rune) return;
+        el.dataset.rune = '1';
+        var parts = [];
+        el.childNodes.forEach(function(node) {
+          if (node.nodeName === 'BR') { parts.push(node.cloneNode()); }
+          else if (node.textContent) { [...node.textContent].forEach(function(ch) { parts.push(ch); }); }
+        });
+        el.innerHTML = '';
+        var i = 0;
+        parts.forEach(function(part) {
+          if (part.nodeName === 'BR') { el.appendChild(part); }
+          else {
+            var s = document.createElement('span');
+            s.textContent = part === ' ' ? ' ' : part;
+            s.style.transitionDelay = i * 40 + 'ms';
+            el.appendChild(s);
+            i++;
+          }
+        });
+      });
+    }
+    if (document.readyState === 'complete') { initRuneGlow(); }
+    else { window.addEventListener('load', initRuneGlow); }
+  </script>
+
+</body>
+</html>

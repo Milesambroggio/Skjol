@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amenities — Skjól Avon | Luxury Mountain Living in the Vail Valley</title>
+  <meta name="description" content="Explore the amenities at Skjól Avon — Nordic-inspired spa, rooftop hot tub, owner's lounge, ski lockers, heated parking, and more. Where the lodge meets modern living.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== DESIGN TOKENS ===== */
+    :root {
+      --navy: #3D3D5C;
+      --navy-light: #4A4A6A;
+      --navy-dark: #2D2D45;
+      --purple-mist: #8B7BA8;
+      --cream: #F5F0EB;
+      --cream-light: #FAF8F5;
+      --white: #FFFFFF;
+      --gold: #C4A97D;
+      --gold-light: #D4BE9A;
+      --text-dark: #2A2A3E;
+      --text-body: #555566;
+      --text-light: #888899;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      --rune-glow: #7EC8E3;
+      --rune-glow-rgb: 126, 200, 227;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--text-dark); background: var(--white); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== SHARED TYPOGRAPHY ===== */
+    .section-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--purple-mist);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: 44px;
+      font-weight: 400;
+      color: var(--text-dark);
+      line-height: 1.15;
+    }
+    .wavy-divider {
+      display: block;
+      margin: 18px 0 24px;
+      width: 80px;
+      height: 8px;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .btn-primary {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--navy-dark); }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--white);
+    }
+    .btn-gold:hover { background: var(--gold-light); }
+    .btn-secondary {
+      background: transparent;
+      border: 1.5px solid var(--white);
+      color: var(--white);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--navy);
+      color: var(--navy);
+    }
+    .btn-outline:hover { background: var(--navy); color: var(--white); }
+    .btn-outline:hover svg path { stroke: var(--white); }
+    .arrow-icon { transition: transform 0.3s ease; }
+    .btn:hover .arrow-icon { transform: translateX(3px); }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 50px;
+      transition: all 0.4s ease;
+    }
+    .nav.scrolled {
+      background: rgba(45, 45, 69, 0.97);
+      padding: 14px 50px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-logo img { width: 38px; height: auto; transition: all 0.3s ease; }
+    .nav.scrolled .nav-logo img { width: 30px; height: auto; }
+    .nav-logo-text {
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--white);
+      transition: all 0.3s ease;
+    }
+    .nav-logo:hover .nav-logo-text {
+      color: var(--rune-glow);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      transition: all 0.3s ease;
+    }
+    .nav-links a:hover {
+      color: var(--rune-glow);
+    }
+    .nav-links a.active { color: var(--gold); }
+    .nav-cta {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--gold);
+      padding: 10px 24px;
+      transition: all 0.3s ease;
+    }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* Mobile nav overlay */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 999;
+      background: rgba(45, 45, 69, 0.98);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--white);
+      transition: all 0.3s ease;
+    }
+    .mobile-nav a:hover {
+      color: var(--rune-glow);
+    }
+    .mobile-nav .nav-cta {
+      margin-top: 12px;
+      padding: 14px 36px;
+    }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      position: relative;
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--navy-dark);
+    }
+    .page-hero-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(180deg, rgba(26,26,46,0.82) 0%, rgba(45,45,69,0.7) 50%, rgba(45,45,69,0.88) 100%);
+      z-index: 0;
+    }
+    /* Aurora borealis effect */
+    .page-hero-aurora {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 70%;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at 25% 0%, rgba(126,200,227,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 0%, rgba(139,123,168,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 20%, rgba(196,169,125,0.06) 0%, transparent 45%);
+      animation: auroraShift 10s ease-in-out infinite alternate;
+    }
+    @keyframes auroraShift {
+      0% { opacity: 0.6; transform: translateX(-3%) scaleY(1); }
+      50% { opacity: 1; transform: translateX(2%) scaleY(1.05); }
+      100% { opacity: 0.7; transform: translateX(3%) scaleY(0.95); }
+    }
+    /* Floating rune particles */
+    .page-hero-particles {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .rune-particle {
+      position: absolute;
+      opacity: 0;
+      animation: runeFloat linear infinite;
+    }
+    @keyframes runeFloat {
+      0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { opacity: 0; transform: translateY(-220px) rotate(45deg); }
+    }
+    /* Decorative rune border */
+    .page-hero-rune-border {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      z-index: 1;
+      background: linear-gradient(90deg, transparent, rgba(126,200,227,0.3), rgba(196,169,125,0.4), rgba(126,200,227,0.3), transparent);
+    }
+    .page-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      padding: 0 24px;
+    }
+    .page-hero-title {
+      font-family: var(--serif);
+      font-size: 56px;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .page-hero-sub {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* ===== INTRO SECTION ===== */
+    .amenities-intro {
+      padding: 80px 50px;
+      background: var(--cream-light);
+      text-align: center;
+    }
+    .amenities-intro-inner {
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .amenities-intro p {
+      font-family: var(--sans);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.85;
+      color: var(--text-body);
+    }
+
+    /* ===== AMENITY CATEGORY SECTIONS ===== */
+    .amenity-category {
+      padding: 100px 50px;
+    }
+    .amenity-category:nth-child(even) {
+      background: var(--cream-light);
+    }
+    .amenity-category-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .amenity-category.reversed .amenity-category-inner {
+      direction: rtl;
+    }
+    .amenity-category.reversed .amenity-category-inner > * {
+      direction: ltr;
+    }
+    .amenity-image {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+    }
+    .amenity-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .amenity-text .section-label {
+      margin-bottom: 12px;
+    }
+    .amenity-text .section-title {
+      margin-bottom: 8px;
+    }
+    .amenity-text .amenity-desc {
+      font-family: var(--sans);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.8;
+      color: var(--text-body);
+      margin-bottom: 28px;
+    }
+    .amenity-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .amenity-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-dark);
+    }
+    .amenity-list li svg {
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+
+    /* ===== BUILDING SPECS STRIP ===== */
+    .specs-strip {
+      background: var(--navy-dark);
+      padding: 48px 50px;
+    }
+    .specs-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+    .spec-item {}
+    .spec-icon {
+      margin: 0 auto 12px;
+    }
+    .spec-label {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* ===== CTA SECTION ===== */
+    .cta-section {
+      padding: 100px 50px;
+      background: var(--cream);
+      text-align: center;
+    }
+    .cta-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .cta-inner .section-title {
+      margin-bottom: 12px;
+    }
+    .cta-sub {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--text-body);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+    .cta-buttons {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--navy-dark);
+      padding: 60px 50px 36px;
+      color: rgba(255,255,255,0.6);
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand-logo { width: 44px; height: auto; margin-bottom: 16px; }
+    .footer-tagline {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-style: italic;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 20px;
+    }
+    .footer-contact p {
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 2;
+    }
+    .footer-contact a {
+      color: var(--gold-light);
+      transition: all 0.3s ease;
+    }
+    .footer-contact a:hover {
+      color: var(--rune-glow);
+    }
+    .footer-nav-title {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 18px;
+    }
+    .footer-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-nav-links a {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      transition: all 0.3s ease;
+    }
+    .footer-nav-links a:hover {
+      color: var(--rune-glow);
+    }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+    }
+    .footer-legal {
+      font-family: var(--sans);
+      font-size: 11px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ===== RUNE GLOW — LETTER BY LETTER ===== */
+    .rune-text span {
+      display: inline-block;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .rune-text:hover span,
+    .rune-hover:hover .rune-text span {
+      color: var(--rune-glow);
+      text-shadow: 0 0 7px rgba(var(--rune-glow-rgb), 0.8), 0 0 20px rgba(var(--rune-glow-rgb), 0.4), 0 0 40px rgba(var(--rune-glow-rgb), 0.2);
+    }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .nav { padding: 16px 24px; }
+      .nav.scrolled { padding: 12px 24px; }
+      .nav-links, .nav > .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .page-hero-title { font-size: 40px; }
+      .page-hero-sub { font-size: 12px; letter-spacing: 2px; }
+
+      .amenities-intro { padding: 56px 24px; }
+
+      .amenity-category { padding: 64px 24px; }
+      .amenity-category-inner { grid-template-columns: 1fr; gap: 32px; }
+      .amenity-category.reversed .amenity-category-inner { direction: ltr; }
+
+      .specs-strip { padding: 40px 24px; }
+      .specs-inner { grid-template-columns: 1fr 1fr; gap: 32px; }
+
+      .cta-section { padding: 64px 24px; }
+      .cta-buttons { flex-direction: column; }
+      .section-title { font-size: 34px; }
+
+      .footer { padding: 48px 24px 28px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 480px) {
+      .page-hero-title { font-size: 32px; }
+      .specs-inner { grid-template-columns: 1fr; gap: 24px; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav" id="mainNav">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo-transparent.png" alt="Skjól">
+      <span class="nav-logo-text">Skjol</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="residences.html">Residences</a></li>
+      <li><a href="amenities.html" class="active">Amenities</a></li>
+      <li><a href="location.html">Location</a></li>
+      <li><a href="vision.html">The Vision</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Register</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="residences.html" onclick="closeMobile()">Residences</a>
+    <a href="amenities.html" onclick="closeMobile()">Amenities</a>
+    <a href="location.html" onclick="closeMobile()">Location</a>
+    <a href="vision.html" onclick="closeMobile()">The Vision</a>
+    <a href="contact.html" onclick="closeMobile()">Contact</a>
+    <a href="contact.html" class="nav-cta" onclick="closeMobile()">Register Now</a>
+  </div>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="page-hero" style="background-image: url('images/amenity-pool.jpg');">
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-aurora"></div>
+    <div class="page-hero-particles" id="heroParticles"></div>
+    <div class="page-hero-rune-border"></div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title">The Amenities</h1>
+      <p class="page-hero-sub">Where the lodge meets modern living</p>
+    </div>
+  </section>
+
+  <!-- ===== INTRO ===== -->
+  <section class="amenities-intro">
+    <div class="amenities-intro-inner reveal">
+      <span class="section-label">Life at Skjol</span>
+      <svg class="wavy-divider" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg" style="margin-left:auto;margin-right:auto;">
+        <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#C4A97D" stroke-width="1.2"/>
+      </svg>
+      <p>Every shared space at Skjol is designed around the Scandinavian concept of <em>hygge</em> -- that untranslatable feeling of warmth, connection, and togetherness. From the firelit lounge to the rooftop terrace, these are places where neighbors become friends and every season feels like an invitation to gather.</p>
+    </div>
+  </section>
+
+  <!-- ===== POOL & WELLNESS ===== -->
+  <section class="amenity-category">
+    <div class="amenity-category-inner">
+      <div class="amenity-image reveal">
+        <img src="images/amenity-pool.jpg" alt="Resort-style pool area at Skjol Avon">
+      </div>
+      <div class="amenity-text reveal">
+        <span class="section-label">Wellness</span>
+        <h2 class="section-title">Pool &amp; Spa</h2>
+        <svg class="wavy-divider" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#3D3D5C" stroke-width="1.2"/>
+        </svg>
+        <p class="amenity-desc">Restore body and mind in spaces inspired by Nordic bathing traditions and alpine vitality. A resort-style pool with waterslide, multiple spas and hot tubs, and fire pits create an outdoor oasis in every season.</p>
+        <ul class="amenity-list">
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Resort-style pool with waterslide
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Multiple spas and hot tubs
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Finnish sauna
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Outdoor fire pits and grilling areas
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FITNESS CENTER ===== -->
+  <section class="amenity-category reversed">
+    <div class="amenity-category-inner">
+      <div class="amenity-image reveal">
+        <img src="images/amenity-gym.jpg" alt="State-of-the-art fitness center at Skjol Avon">
+      </div>
+      <div class="amenity-text reveal">
+        <span class="section-label">Fitness</span>
+        <h2 class="section-title">Fitness &amp; Movement</h2>
+        <svg class="wavy-divider" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#3D3D5C" stroke-width="1.2"/>
+        </svg>
+        <p class="amenity-desc">A state-of-the-art fitness center designed for everything from morning cardio to serious strength training. Complement your workout in the dedicated yoga studio or recover in the spa after a long day on the mountain.</p>
+        <ul class="amenity-list">
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            State-of-the-art fitness center
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Yoga and movement studio
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Indoor and outdoor pickleball
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== GOLF SIMULATOR ===== -->
+  <section class="amenity-category">
+    <div class="amenity-category-inner">
+      <div class="amenity-image reveal">
+        <img src="images/amenity-golf-simulator.jpg" alt="Golf and multi-sport simulator at Skjol Avon">
+      </div>
+      <div class="amenity-text reveal">
+        <span class="section-label">Recreation</span>
+        <h2 class="section-title">Social &amp; Entertainment</h2>
+        <svg class="wavy-divider" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#3D3D5C" stroke-width="1.2"/>
+        </svg>
+        <p class="amenity-desc">Community is built in shared moments. The golf and multi-sport simulator brings year-round play indoors, while the private club room, cafe, and lounge spaces give neighbors a reason to linger.</p>
+        <ul class="amenity-list">
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Golf and multi-sport simulator
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Private club room
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Cafe and coffee bar
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Owner's lounge with fireside seating
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SKI LOCKERS ===== -->
+  <section class="amenity-category reversed">
+    <div class="amenity-category-inner">
+      <div class="amenity-image reveal">
+        <img src="images/amenity-ski-locker.jpg" alt="Private ski lockers at Skjol Avon">
+      </div>
+      <div class="amenity-text reveal">
+        <span class="section-label">Convenience</span>
+        <h2 class="section-title">Ski &amp; Gear Storage</h2>
+        <svg class="wavy-divider" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#3D3D5C" stroke-width="1.2"/>
+        </svg>
+        <p class="amenity-desc">Every practical detail has been considered so you can spend less time managing and more time living. Warm boots waiting in your ski locker, gear dried and ready — Skjol removes the friction from mountain life.</p>
+        <ul class="amenity-list">
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Private ski lockers with boot warmers
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Heated underground parking
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Bike storage and workshop
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            EV charging stations
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SHUTTLE SERVICE ===== -->
+  <section class="amenity-category">
+    <div class="amenity-category-inner">
+      <div class="amenity-image reveal">
+        <img src="images/amenity-shuttle.jpg" alt="Dedicated ski shuttle service at Skjol Avon">
+      </div>
+      <div class="amenity-text reveal">
+        <span class="section-label">Services</span>
+        <h2 class="section-title">Transportation &amp; Concierge</h2>
+        <svg class="wavy-divider" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#3D3D5C" stroke-width="1.2"/>
+        </svg>
+        <p class="amenity-desc">A dedicated ski shuttle runs directly to Vail and Beaver Creek, so the mountain is always minutes away. On-site hospitality and property management handle the details, whether you're in residence or away.</p>
+        <ul class="amenity-list">
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Dedicated ski shuttle to Vail &amp; Beaver Creek
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            On-site hospitality and front desk
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Property management services
+          </li>
+          <li>
+            <svg viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 9.5l4 4 8-8" stroke="#C4A97D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            Concierge services
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BUILDING SPECS STRIP ===== -->
+  <section class="specs-strip">
+    <div class="specs-inner">
+      <div class="spec-item reveal">
+        <svg class="spec-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="4" y="8" width="24" height="20" rx="1" stroke="#C4A97D" stroke-width="1.5"/>
+          <line x1="4" y1="14" x2="28" y2="14" stroke="#C4A97D" stroke-width="1.2"/>
+          <line x1="4" y1="20" x2="28" y2="20" stroke="#C4A97D" stroke-width="1.2"/>
+          <line x1="4" y1="26" x2="28" y2="26" stroke="#C4A97D" stroke-width="1.2"/>
+          <line x1="16" y1="8" x2="16" y2="28" stroke="#C4A97D" stroke-width="1.2"/>
+        </svg>
+        <div class="spec-label">4 Stories</div>
+      </div>
+      <div class="spec-item reveal">
+        <svg class="spec-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="6" y="14" width="20" height="14" rx="1" stroke="#C4A97D" stroke-width="1.5"/>
+          <path d="M10 14V10a6 6 0 0112 0v4" stroke="#C4A97D" stroke-width="1.5"/>
+          <circle cx="16" cy="21" r="2" stroke="#C4A97D" stroke-width="1.5"/>
+        </svg>
+        <div class="spec-label">Underground Parking</div>
+      </div>
+      <div class="spec-item reveal">
+        <svg class="spec-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M4 28V10l12-6 12 6v18" stroke="#C4A97D" stroke-width="1.5" stroke-linejoin="round"/>
+          <line x1="4" y1="10" x2="28" y2="10" stroke="#C4A97D" stroke-width="1.2"/>
+          <circle cx="16" cy="7" r="1.5" fill="#C4A97D"/>
+        </svg>
+        <div class="spec-label">Rooftop Terrace</div>
+      </div>
+      <div class="spec-item reveal">
+        <svg class="spec-icon" width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="16" cy="16" r="10" stroke="#C4A97D" stroke-width="1.5"/>
+          <path d="M12 16l3 3 6-6" stroke="#C4A97D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M16 6V4M16 28v-2M6 16H4M28 16h-2" stroke="#C4A97D" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <div class="spec-label">LEED-Inspired Design</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA SECTION ===== -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <span class="section-label reveal">Get Started</span>
+      <svg class="wavy-divider reveal" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg" style="margin-left:auto;margin-right:auto;">
+        <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#C4A97D" stroke-width="1.2"/>
+      </svg>
+      <h2 class="section-title reveal">Experience It for Yourself</h2>
+      <p class="cta-sub reveal">Schedule a private tour or register for priority access to explore every amenity Skjol has to offer.</p>
+      <div class="cta-buttons reveal">
+        <a href="contact.html" class="btn btn-gold">
+          Register Now
+          <svg class="arrow-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="contact.html" class="btn btn-outline">
+          Schedule a Tour
+          <svg class="arrow-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="footer-brand-logo" src="images/logo-transparent.png" alt="Skjól">
+        <p class="footer-tagline">A modern sanctuary for mountain souls</p>
+        <div class="footer-contact">
+          <p><a href="mailto:info@skjolavon.com">info@skjolavon.com</a></p>
+          <p><a href="tel:9705474000">(970) 547-4000</a></p>
+        </div>
+      </div>
+      <div>
+        <p class="footer-nav-title">Explore</p>
+        <ul class="footer-nav-links">
+          <li><a href="residences.html">Residences</a></li>
+          <li><a href="amenities.html">Amenities</a></li>
+          <li><a href="location.html">Location</a></li>
+          <li><a href="vision.html">The Vision</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-nav-title">Connect</p>
+        <ul class="footer-nav-links">
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="contact.html">Register</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-legal">All renderings, floor plans, amenities, and pricing are conceptual and subject to change without notice. This is not an offer to sell or a solicitation of an offer to buy in any jurisdiction where such offer or solicitation would be unlawful. Skjol Avon is developed by its respective ownership entities. Equal Housing Opportunity. &copy; 2026 Skjol Avon. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Sticky nav scroll behavior
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+    // Start scrolled since hero is shorter
+    if (window.scrollY > 60) nav.classList.add('scrolled');
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+      document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    });
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // Rune glow — letter-by-letter unveil
+    function initRuneGlow() {
+      // Tag elements that should glow
+      var isMobile = window.innerWidth <= 900;
+      var glowSelector = isMobile
+        ? '.nav-links a, .mobile-nav a:not(.nav-cta), .footer-nav-links a, .footer-contact a, .nav-logo-text'
+        : '.nav-links a, .mobile-nav a:not(.nav-cta), .footer-nav-links a, .footer-contact a, .nav-logo-text, .page-hero-title, .hero-headline';
+      document.querySelectorAll(glowSelector).forEach(el => {
+        el.classList.add('rune-text');
+      });
+      document.querySelectorAll('.nav-logo').forEach(el => el.classList.add('rune-hover'));
+
+      // Split text into individual character spans with staggered delay
+      document.querySelectorAll('.rune-text').forEach(el => {
+        if (el.dataset.rune) return;
+        el.dataset.rune = '1';
+        const text = el.textContent;
+        el.innerHTML = '';
+        [...text].forEach((ch, i) => {
+          const s = document.createElement('span');
+          s.textContent = ch === ' ' ? ' ' : ch;
+          s.style.transitionDelay = i * 40 + 'ms';
+          el.appendChild(s);
+        });
+      });
+    }
+    initRuneGlow();
+
+    // Floating rune particles
+    (function initHeroParticles() {
+      const container = document.getElementById('heroParticles');
+      if (!container) return;
+      const runeChars = ['ᚺ','ᚲ','ᛇ','ᛁ','ᚠ','ᚱ','ᛉ','ᛚ','ᛏ','ᛒ'];
+      for (let i = 0; i < 20; i++) {
+        const p = document.createElement('span');
+        p.className = 'rune-particle';
+        p.textContent = runeChars[Math.floor(Math.random() * runeChars.length)];
+        p.style.left = Math.random() * 100 + '%';
+        p.style.bottom = -(Math.random() * 40) + 'px';
+        p.style.fontSize = (14 + Math.random() * 18) + 'px';
+        p.style.color = Math.random() > 0.5 ? 'rgba(126,200,227,0.55)' : 'rgba(196,169,125,0.45)';
+        p.style.animationDuration = (4 + Math.random() * 6) + 's';
+        p.style.animationDelay = (Math.random() * 5) + 's';
+        container.appendChild(p);
+      }
+    })();
+  </script>
+
+</body>
+</html>

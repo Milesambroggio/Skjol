@@ -1,0 +1,1023 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Location & Lifestyle — Skjól Avon</title>
+  <meta name="description" content="Skjól Avon is perfectly positioned between Vail and Beaver Creek in Avon, Colorado. Minutes from world-class skiing, dining, and year-round mountain activities.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== DESIGN TOKENS ===== */
+    :root {
+      --navy: #3D3D5C;
+      --navy-light: #4A4A6A;
+      --navy-dark: #2D2D45;
+      --purple-mist: #8B7BA8;
+      --cream: #F5F0EB;
+      --cream-light: #FAF8F5;
+      --white: #FFFFFF;
+      --gold: #C4A97D;
+      --gold-light: #D4BE9A;
+      --text-dark: #2A2A3E;
+      --text-body: #555566;
+      --text-light: #888899;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+      --rune-glow: #7EC8E3;
+      --rune-glow-rgb: 126, 200, 227;
+    }
+
+    /* ===== RESET ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); color: var(--text-dark); background: var(--white); overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* ===== SHARED TYPOGRAPHY ===== */
+    .section-label {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--purple-mist);
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: 44px;
+      font-weight: 400;
+      color: var(--text-dark);
+      line-height: 1.15;
+    }
+    .wavy-divider {
+      display: block;
+      margin: 18px 0 24px;
+      width: 80px;
+      height: 8px;
+    }
+
+    /* ===== BUTTONS ===== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      padding: 16px 36px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .btn-primary {
+      background: var(--navy);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: var(--navy-dark); }
+    .btn-gold {
+      background: var(--gold);
+      color: var(--white);
+    }
+    .btn-gold:hover { background: var(--gold-light); }
+    .btn-secondary {
+      background: transparent;
+      border: 1.5px solid var(--white);
+      color: var(--white);
+    }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--navy);
+      color: var(--navy);
+    }
+    .btn-outline:hover { background: var(--navy); color: var(--white); }
+    .btn-outline:hover svg path { stroke: var(--white); }
+    .arrow-icon { transition: transform 0.3s ease; }
+    .btn:hover .arrow-icon { transform: translateX(3px); }
+
+    /* ===== NAVIGATION ===== */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 22px 50px;
+      transition: all 0.4s ease;
+    }
+    .nav.scrolled {
+      background: rgba(45, 45, 69, 0.97);
+      padding: 14px 50px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(0,0,0,0.15);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .nav-logo img { width: 38px; height: auto; transition: all 0.3s ease; }
+    .nav.scrolled .nav-logo img { width: 30px; height: auto; }
+    .nav-logo-text {
+      font-family: var(--sans);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--white);
+      transition: all 0.3s ease;
+    }
+    .nav-logo:hover .nav-logo-text {
+      color: var(--rune-glow);
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      transition: all 0.3s ease;
+    }
+    .nav-links a:hover {
+      color: var(--rune-glow);
+    }
+    .nav-cta {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      background: var(--gold);
+      padding: 10px 24px;
+      transition: all 0.3s ease;
+    }
+    .nav-cta:hover { background: var(--gold-light); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .hamburger span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--white);
+      transition: all 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+    /* Mobile nav overlay */
+    .mobile-nav {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 999;
+      background: rgba(45, 45, 69, 0.98);
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav a {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--white);
+      transition: all 0.3s ease;
+    }
+    .mobile-nav a:hover {
+      color: var(--rune-glow);
+    }
+    .mobile-nav .nav-cta {
+      margin-top: 12px;
+      padding: 14px 36px;
+    }
+
+    /* ===== PAGE HERO ===== */
+    .page-hero {
+      position: relative;
+      min-height: 50vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      background-color: var(--navy-dark);
+    }
+    .page-hero-overlay {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: linear-gradient(180deg, rgba(26,26,46,0.82) 0%, rgba(45,45,69,0.7) 50%, rgba(45,45,69,0.88) 100%);
+      z-index: 0;
+    }
+    /* Aurora borealis effect */
+    .page-hero-aurora {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 70%;
+      z-index: 0;
+      background:
+        radial-gradient(ellipse at 25% 0%, rgba(126,200,227,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 75% 0%, rgba(139,123,168,0.10) 0%, transparent 50%),
+        radial-gradient(ellipse at 50% 20%, rgba(196,169,125,0.06) 0%, transparent 45%);
+      animation: auroraShift 10s ease-in-out infinite alternate;
+    }
+    @keyframes auroraShift {
+      0% { opacity: 0.6; transform: translateX(-3%) scaleY(1); }
+      50% { opacity: 1; transform: translateX(2%) scaleY(1.05); }
+      100% { opacity: 0.7; transform: translateX(3%) scaleY(0.95); }
+    }
+    /* Floating rune particles */
+    .page-hero-particles {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .rune-particle {
+      position: absolute;
+      opacity: 0;
+      animation: runeFloat linear infinite;
+    }
+    @keyframes runeFloat {
+      0% { opacity: 0; transform: translateY(0) rotate(0deg); }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { opacity: 0; transform: translateY(-220px) rotate(45deg); }
+    }
+    /* Decorative rune border */
+    .page-hero-rune-border {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      z-index: 1;
+      background: linear-gradient(90deg, transparent, rgba(126,200,227,0.3), rgba(196,169,125,0.4), rgba(126,200,227,0.3), transparent);
+    }
+    .page-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      padding: 0 24px;
+    }
+    .page-hero-title {
+      font-family: var(--serif);
+      font-size: 56px;
+      font-weight: 400;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 20px;
+    }
+    .page-hero-sub {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+    }
+
+    /* ===== PROXIMITY SECTION ===== */
+    .proximity-section {
+      padding: 100px 50px;
+      background: var(--cream-light);
+    }
+    .proximity-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .proximity-inner .section-title {
+      margin-bottom: 60px;
+    }
+    .proximity-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .proximity-card {
+      background: var(--navy);
+      padding: 48px 24px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .proximity-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(61,61,92,0.25);
+    }
+    .proximity-number {
+      font-family: var(--serif);
+      font-size: 52px;
+      font-weight: 400;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .proximity-unit {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--gold-light);
+      margin-bottom: 16px;
+    }
+    .proximity-dest {
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+    }
+
+    /* ===== MAP PLACEHOLDER ===== */
+    .map-section {
+      padding: 0 50px;
+      background: var(--cream-light);
+      padding-bottom: 100px;
+    }
+    .map-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      height: 600px;
+      position: relative;
+      overflow: hidden;
+    }
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      filter: grayscale(20%) contrast(1.05);
+    }
+
+    /* ===== NEIGHBORHOOD SECTION ===== */
+    .neighborhood-section {
+      padding: 100px 50px;
+      background: var(--white);
+    }
+    .neighborhood-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .neighborhood-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .neighborhood-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+    }
+    .neighborhood-card {
+      transition: transform 0.3s ease;
+    }
+    .neighborhood-card:hover {
+      transform: translateY(-4px);
+    }
+    .neighborhood-img {
+      width: 100%;
+      height: 220px;
+      background: var(--cream);
+      background-size: cover;
+      background-position: center;
+      margin-bottom: 20px;
+    }
+    .neighborhood-name {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--text-dark);
+      margin-bottom: 8px;
+    }
+    .neighborhood-desc {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--text-body);
+      line-height: 1.6;
+    }
+
+    /* ===== FOUR SEASONS SECTION ===== */
+    .seasons-section {
+      padding: 100px 50px;
+      background: var(--cream-light);
+    }
+    .seasons-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .seasons-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+    .seasons-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+    }
+    .season-card {
+      padding: 48px 28px;
+      text-align: center;
+      transition: transform 0.3s ease;
+      position: relative;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+    }
+    .season-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: 0;
+    }
+    .season-card > * { position: relative; z-index: 1; }
+    .season-card:hover {
+      transform: translateY(-4px);
+    }
+    .season-card--winter {
+      background-image: url('images/season-winter.jpg');
+      background-color: #4a6fa5;
+    }
+    .season-card--winter::before { background: linear-gradient(160deg, rgba(74,111,165,0.7) 0%, rgba(107,91,138,0.75) 100%); }
+    .season-card--spring {
+      background-image: url('images/season-spring.jpg');
+      background-color: #6a9ab5;
+    }
+    .season-card--spring::before { background: linear-gradient(160deg, rgba(106,154,181,0.7) 0%, rgba(138,181,200,0.75) 100%); }
+    .season-card--summer {
+      background-image: url('images/season-summer.jpg');
+      background-color: #4a7a5a;
+    }
+    .season-card--summer::before { background: linear-gradient(160deg, rgba(74,122,90,0.7) 0%, rgba(90,138,106,0.75) 100%); }
+    .season-card--autumn {
+      background-image: url('images/season-autumn.jpg');
+      background-color: #b8943e;
+    }
+    .season-card--autumn::before { background: linear-gradient(160deg, rgba(184,148,62,0.7) 0%, rgba(196,169,125,0.75) 100%); }
+    .season-icon {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 12px;
+      color: rgba(255,255,255,0.8);
+      transition: filter 0.4s ease, color 0.4s ease;
+    }
+    .season-rune-name {
+      transition: color 0.4s ease, text-shadow 0.4s ease;
+    }
+
+    /* Season-specific rune glow on hover */
+    .season-card--winter:hover .season-icon {
+      color: #a3cde6;
+      filter: drop-shadow(0 0 5px rgba(123,175,212,1)) drop-shadow(0 0 14px rgba(123,175,212,0.85)) drop-shadow(0 0 32px rgba(74,111,165,0.5));
+    }
+    .season-card--winter:hover .season-rune-name {
+      color: #a3cde6;
+      text-shadow: 0 0 5px rgba(123,175,212,1), 0 0 14px rgba(74,111,165,0.8), 0 0 32px rgba(74,111,165,0.4);
+    }
+    .season-card--spring:hover .season-icon {
+      color: #b0d4e2;
+      filter: drop-shadow(0 0 5px rgba(138,181,200,1)) drop-shadow(0 0 14px rgba(138,181,200,0.85)) drop-shadow(0 0 32px rgba(106,154,181,0.5));
+    }
+    .season-card--spring:hover .season-rune-name {
+      color: #b0d4e2;
+      text-shadow: 0 0 5px rgba(138,181,200,1), 0 0 14px rgba(106,154,181,0.8), 0 0 32px rgba(106,154,181,0.4);
+    }
+    .season-card--summer:hover .season-icon {
+      color: #a4dbb5;
+      filter: drop-shadow(0 0 5px rgba(125,184,143,1)) drop-shadow(0 0 14px rgba(125,184,143,0.85)) drop-shadow(0 0 32px rgba(74,122,90,0.5));
+    }
+    .season-card--summer:hover .season-rune-name {
+      color: #a4dbb5;
+      text-shadow: 0 0 5px rgba(125,184,143,1), 0 0 14px rgba(74,122,90,0.8), 0 0 32px rgba(74,122,90,0.4);
+    }
+    .season-card--autumn:hover .season-icon {
+      color: #e0c98f;
+      filter: drop-shadow(0 0 5px rgba(196,169,125,1)) drop-shadow(0 0 14px rgba(196,169,125,0.85)) drop-shadow(0 0 32px rgba(184,148,62,0.5));
+    }
+    .season-card--autumn:hover .season-rune-name {
+      color: #e0c98f;
+      text-shadow: 0 0 5px rgba(196,169,125,1), 0 0 14px rgba(184,148,62,0.8), 0 0 32px rgba(184,148,62,0.4);
+    }
+
+    .season-rune-name {
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+    .season-name {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .season-desc {
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 400;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.7;
+    }
+
+    /* ===== CTA SECTION ===== */
+    .cta-section {
+      padding: 100px 50px;
+      background: var(--navy-dark);
+      text-align: center;
+    }
+    .cta-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .cta-inner .section-title {
+      color: var(--white);
+      margin-bottom: 16px;
+    }
+    .cta-sub {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+      margin-bottom: 40px;
+    }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--navy-dark);
+      padding: 60px 50px 36px;
+      color: rgba(255,255,255,0.6);
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+    .footer-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand-logo { width: 44px; height: auto; margin-bottom: 16px; }
+    .footer-tagline {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-style: italic;
+      color: rgba(255,255,255,0.5);
+      margin-bottom: 20px;
+    }
+    .footer-contact p {
+      font-family: var(--sans);
+      font-size: 13px;
+      line-height: 2;
+    }
+    .footer-contact a {
+      color: var(--gold-light);
+      transition: all 0.3s ease;
+    }
+    .footer-contact a:hover {
+      color: var(--rune-glow);
+    }
+    .footer-nav-title {
+      font-family: var(--sans);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 18px;
+    }
+    .footer-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .footer-nav-links a {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: rgba(255,255,255,0.6);
+      transition: all 0.3s ease;
+    }
+    .footer-nav-links a:hover {
+      color: var(--rune-glow);
+    }
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 0 auto;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 24px;
+    }
+    .footer-legal {
+      font-family: var(--sans);
+      font-size: 11px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.3);
+    }
+
+    /* ===== RUNE GLOW — LETTER BY LETTER ===== */
+    .rune-text span {
+      display: inline-block;
+      transition: color 0.3s ease, text-shadow 0.3s ease;
+    }
+    .rune-text:hover span,
+    .rune-hover:hover .rune-text span {
+      color: var(--rune-glow);
+      text-shadow: 0 0 7px rgba(var(--rune-glow-rgb), 0.8), 0 0 20px rgba(var(--rune-glow-rgb), 0.4), 0 0 40px rgba(var(--rune-glow-rgb), 0.2);
+    }
+
+    /* ===== SCROLL REVEAL ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .nav { padding: 16px 24px; }
+      .nav.scrolled { padding: 12px 24px; }
+      .nav-links, .nav > .nav-cta { display: none; }
+      .hamburger { display: flex; }
+
+      .page-hero-title { font-size: 40px; }
+      .page-hero-sub { font-size: 12px; letter-spacing: 2px; }
+
+      .proximity-section { padding: 64px 24px; }
+      .proximity-grid { grid-template-columns: 1fr 1fr; }
+
+      .map-section { padding: 0 24px 64px; }
+      .map-container { height: 400px; }
+
+      .neighborhood-section { padding: 64px 24px; }
+      .neighborhood-grid { grid-template-columns: 1fr; }
+
+      .seasons-section { padding: 64px 24px; }
+      .seasons-grid { grid-template-columns: 1fr 1fr; }
+
+      .cta-section { padding: 64px 24px; }
+      .section-title { font-size: 34px; }
+
+      .footer { padding: 48px 24px 28px; }
+      .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+    }
+
+    @media (max-width: 480px) {
+      .page-hero-title { font-size: 32px; }
+      .proximity-grid { grid-template-columns: 1fr; }
+      .seasons-grid { grid-template-columns: 1fr; }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- ===== NAVIGATION ===== -->
+  <nav class="nav" id="mainNav">
+    <a href="index.html" class="nav-logo">
+      <img src="images/logo-transparent.png" alt="Skjól">
+      <span class="nav-logo-text">Skjol</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="residences.html">Residences</a></li>
+      <li><a href="amenities.html">Amenities</a></li>
+      <li><a href="location.html">Location</a></li>
+      <li><a href="vision.html">The Vision</a></li>
+    </ul>
+    <a href="contact.html" class="nav-cta">Register</a>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Nav Overlay -->
+  <div class="mobile-nav" id="mobileNav">
+    <a href="residences.html" onclick="closeMobile()">Residences</a>
+    <a href="amenities.html" onclick="closeMobile()">Amenities</a>
+    <a href="location.html" onclick="closeMobile()">Location</a>
+    <a href="vision.html" onclick="closeMobile()">The Vision</a>
+    <a href="contact.html" onclick="closeMobile()">Contact</a>
+    <a href="contact.html" class="nav-cta" onclick="closeMobile()">Register Now</a>
+  </div>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="page-hero" style="background-image: url('images/neighborhood-vail.jpg');">
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-aurora"></div>
+    <div class="page-hero-particles" id="heroParticles"></div>
+    <div class="page-hero-rune-border"></div>
+    <div class="page-hero-content">
+      <h1 class="page-hero-title">The Location</h1>
+      <p class="page-hero-sub">At the center of everything the valley offers</p>
+    </div>
+  </section>
+
+  <!-- ===== PROXIMITY SECTION ===== -->
+  <section class="proximity-section">
+    <div class="proximity-inner">
+      <span class="section-label reveal">Proximity</span>
+      <svg class="wavy-divider reveal" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg" style="margin-left:auto;margin-right:auto;">
+        <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#3D3D5C" stroke-width="1.2"/>
+      </svg>
+      <h2 class="section-title reveal">Perfectly Positioned</h2>
+      <div class="proximity-grid" style="margin-top: 60px;">
+        <div class="proximity-card reveal">
+          <div class="proximity-number">8</div>
+          <div class="proximity-unit">minutes</div>
+          <div class="proximity-dest">to Vail Village</div>
+        </div>
+        <div class="proximity-card reveal">
+          <div class="proximity-number">5</div>
+          <div class="proximity-unit">minutes</div>
+          <div class="proximity-dest">to Beaver Creek</div>
+        </div>
+        <div class="proximity-card reveal">
+          <div class="proximity-number">25</div>
+          <div class="proximity-unit">minutes</div>
+          <div class="proximity-dest">to Eagle Airport (EGE)</div>
+        </div>
+        <div class="proximity-card reveal">
+          <div class="proximity-number">2</div>
+          <div class="proximity-unit">hours</div>
+          <div class="proximity-dest">to Denver (DIA)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== INTERACTIVE MAP ===== -->
+  <section class="map-section">
+    <div class="map-container reveal">
+      <iframe
+        src="https://maps.google.com/maps?q=Chapel+Pl,+Avon,+CO+81620&t=&z=14&ie=UTF8&iwloc=&output=embed"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Skjol Avon Location — Chapel Pl, Avon, CO 81620">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- ===== NEIGHBORHOOD SECTION ===== -->
+  <section class="neighborhood-section">
+    <div class="neighborhood-inner">
+      <div class="neighborhood-header">
+        <span class="section-label reveal">Explore the Area</span>
+        <svg class="wavy-divider reveal" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg" style="margin-left:auto;margin-right:auto;">
+          <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#3D3D5C" stroke-width="1.2"/>
+        </svg>
+        <h2 class="section-title reveal">Life in Avon</h2>
+      </div>
+      <div class="neighborhood-grid">
+        <div class="neighborhood-card reveal">
+          <div class="neighborhood-img" style="background-image: url('images/neighborhood-beaver-creek.jpg');"></div>
+          <h3 class="neighborhood-name">Beaver Creek Village</h3>
+          <p class="neighborhood-desc">World-class skiing and dining just five minutes away. An alpine village known for immaculate grooming, fine dining, and a refined mountain experience.</p>
+        </div>
+        <div class="neighborhood-card reveal">
+          <div class="neighborhood-img" style="background-image: url('images/neighborhood-vail.jpg');"></div>
+          <h3 class="neighborhood-name">Vail Village</h3>
+          <p class="neighborhood-desc">The iconic heart of the valley — cobblestone streets, boutique shopping, galleries, and après-ski culture eight minutes from your door.</p>
+        </div>
+        <div class="neighborhood-card reveal">
+          <div class="neighborhood-img" style="background-image: url('images/neighborhood-eagle-river.jpg');"></div>
+          <h3 class="neighborhood-name">Eagle River</h3>
+          <p class="neighborhood-desc">Gold Medal fly fishing, whitewater rafting, and scenic riverside trails winding through the valley floor.</p>
+        </div>
+        <div class="neighborhood-card reveal">
+          <div class="neighborhood-img" style="background-image: url('images/nottingham-park.jpg');"></div>
+          <h3 class="neighborhood-name">Nottingham Park</h3>
+          <p class="neighborhood-desc">Avon's lakeside gathering place — summer concerts, farmers markets, paddleboarding, and year-round recreation steps from Skjol.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOUR SEASONS SECTION ===== -->
+  <section class="seasons-section">
+    <div class="seasons-inner">
+      <div class="seasons-header">
+        <span class="section-label reveal">Year-Round Living</span>
+        <svg class="wavy-divider reveal" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg" style="margin-left:auto;margin-right:auto;">
+          <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#3D3D5C" stroke-width="1.2"/>
+        </svg>
+        <h2 class="section-title reveal">Not Just a Ski Home. A Mountain Life.</h2>
+      </div>
+      <div class="seasons-grid">
+        <!-- Winter: Hagalaz ᚺ — disruption, transformation, the power of ice -->
+        <div class="season-card season-card--winter reveal">
+          <svg class="season-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 8v48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M46 8v48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M18 36L46 28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <p class="season-rune-name">Hagalaz</p>
+          <h3 class="season-name">Winter</h3>
+          <p class="season-desc">Deep powder days at two world-class resorts, just minutes from your door. End the day with fireside dining and legendary mountain culture.</p>
+        </div>
+        <!-- Spring: Berkana ᛒ — birch, new beginnings, growth -->
+        <div class="season-card season-card--spring reveal">
+          <svg class="season-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M18 8v48" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M18 8L40 20L18 32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M18 32L40 44L18 56" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <p class="season-rune-name">Berkana</p>
+          <h3 class="season-name">Spring</h3>
+          <p class="season-desc">Chase late-season turns in the morning, then watch wildflowers bloom across the valley. Spring runoff brings world-class rafting to your backyard.</p>
+        </div>
+        <!-- Summer: Sowilo ᛊ — sun, vitality, life force -->
+        <div class="season-card season-card--summer reveal">
+          <svg class="season-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 8L24 28L40 28L24 56" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <p class="season-rune-name">Sowilo</p>
+          <h3 class="season-name">Summer</h3>
+          <p class="season-desc">Hike alpine trails, ride singletrack, tee off with mountain views, or cast a fly on Gold Medal waters. Long days and cool mountain nights.</p>
+        </div>
+        <!-- Autumn: Jera ᛃ — harvest, cycles, reward -->
+        <div class="season-card season-card--autumn reveal">
+          <svg class="season-icon" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M32 8L44 20L32 32" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <path d="M32 32L20 44L32 56" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+          <p class="season-rune-name">Jera</p>
+          <h3 class="season-name">Autumn</h3>
+          <p class="season-desc">Golden aspens paint the valley in amber and fire. Harvest festivals, uncrowded trails, and crisp mountain air make fall the locals' secret season.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA SECTION ===== -->
+  <section class="cta-section">
+    <div class="cta-inner">
+      <span class="section-label reveal" style="color: var(--gold-light);">Your Mountain Home Awaits</span>
+      <svg class="wavy-divider reveal" viewBox="0 0 80 8" xmlns="http://www.w3.org/2000/svg" style="margin-left:auto;margin-right:auto;">
+        <path d="M0 4 Q10 0 20 4 T40 4 T60 4 T80 4" fill="none" stroke="#C4A97D" stroke-width="1.2"/>
+      </svg>
+      <h2 class="section-title reveal" style="color: var(--white);">Discover Your Mountain Home</h2>
+      <p class="cta-sub reveal">Register now for exclusive founders pricing and early access to residence selection at Skjol Avon.</p>
+      <a href="contact.html" class="btn btn-gold reveal">
+        Register Now
+        <svg class="arrow-icon" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 7h11M8 3l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img class="footer-brand-logo" src="images/logo-transparent.png" alt="Skjól">
+        <p class="footer-tagline">A modern sanctuary for mountain souls</p>
+        <div class="footer-contact">
+          <p><a href="mailto:info@skjolavon.com">info@skjolavon.com</a></p>
+          <p><a href="tel:9705474000">(970) 547-4000</a></p>
+        </div>
+      </div>
+      <div>
+        <p class="footer-nav-title">Explore</p>
+        <ul class="footer-nav-links">
+          <li><a href="residences.html">Residences</a></li>
+          <li><a href="amenities.html">Amenities</a></li>
+          <li><a href="location.html">Location</a></li>
+          <li><a href="vision.html">The Vision</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-nav-title">Connect</p>
+        <ul class="footer-nav-links">
+          <li><a href="contact.html">Contact Us</a></li>
+          <li><a href="contact.html">Register</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Use</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-legal">All renderings, floor plans, amenities, and pricing are conceptual and subject to change without notice. This is not an offer to sell or a solicitation of an offer to buy in any jurisdiction where such offer or solicitation would be unlawful. Skjol Avon is developed by its respective ownership entities. Equal Housing Opportunity. &copy; 2026 Skjol Avon. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script>
+    // Sticky nav scroll behavior
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    });
+    // Start scrolled since hero is shorter
+    nav.classList.add('scrolled');
+
+    // Mobile menu toggle
+    const hamburger = document.getElementById('hamburger');
+    const mobileNav = document.getElementById('mobileNav');
+    hamburger.addEventListener('click', () => {
+      hamburger.classList.toggle('open');
+      mobileNav.classList.toggle('open');
+      document.body.style.overflow = mobileNav.classList.contains('open') ? 'hidden' : '';
+    });
+    function closeMobile() {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    reveals.forEach(el => revealObserver.observe(el));
+
+    // Rune glow — letter-by-letter unveil
+    function initRuneGlow() {
+      // Tag elements that should glow
+      var isMobile = window.innerWidth <= 900;
+      var glowSelector = isMobile
+        ? '.nav-links a, .mobile-nav a:not(.nav-cta), .footer-nav-links a, .footer-contact a, .nav-logo-text'
+        : '.nav-links a, .mobile-nav a:not(.nav-cta), .footer-nav-links a, .footer-contact a, .nav-logo-text, .page-hero-title, .hero-headline';
+      document.querySelectorAll(glowSelector).forEach(el => {
+        el.classList.add('rune-text');
+      });
+      document.querySelectorAll('.nav-logo').forEach(el => el.classList.add('rune-hover'));
+
+      // Split text into individual character spans with staggered delay
+      document.querySelectorAll('.rune-text').forEach(el => {
+        if (el.dataset.rune) return;
+        el.dataset.rune = '1';
+        const text = el.textContent;
+        el.innerHTML = '';
+        [...text].forEach((ch, i) => {
+          const s = document.createElement('span');
+          s.textContent = ch === ' ' ? ' ' : ch;
+          s.style.transitionDelay = i * 40 + 'ms';
+          el.appendChild(s);
+        });
+      });
+    }
+    initRuneGlow();
+
+    // Floating rune particles
+    (function initHeroParticles() {
+      const container = document.getElementById('heroParticles');
+      if (!container) return;
+      const runeChars = ['ᚺ','ᚲ','ᛇ','ᛁ','ᚠ','ᚱ','ᛉ','ᛚ','ᛏ','ᛒ'];
+      for (let i = 0; i < 20; i++) {
+        const p = document.createElement('span');
+        p.className = 'rune-particle';
+        p.textContent = runeChars[Math.floor(Math.random() * runeChars.length)];
+        p.style.left = Math.random() * 100 + '%';
+        p.style.bottom = -(Math.random() * 40) + 'px';
+        p.style.fontSize = (14 + Math.random() * 18) + 'px';
+        p.style.color = Math.random() > 0.5 ? 'rgba(126,200,227,0.55)' : 'rgba(196,169,125,0.45)';
+        p.style.animationDuration = (4 + Math.random() * 6) + 's';
+        p.style.animationDelay = (Math.random() * 5) + 's';
+        container.appendChild(p);
+      }
+    })();
+  </script>
+
+</body>
+</html>
