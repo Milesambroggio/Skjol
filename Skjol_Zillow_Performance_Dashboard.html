@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skjól Avon — Zillow Listing Performance</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#3D3D5C; --navy-dark:#2D2D45; --purple:#8B7BA8; --purple-lt:#C7BEDA;
+  --cream:#F5F0EB; --cream-lt:#FAF8F5; --rune:#7EC8E3; --white:#fff;
+  --text-body:#555566; --text-light:#888899; --good:#4A8C7A; --warn:#C46B5A;
+  --serif:'Cormorant Garamond',Georgia,serif; --sans:'Montserrat',Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);background:var(--cream);color:var(--navy);padding:32px;line-height:1.5}
+.wrap{max-width:1200px;margin:0 auto}
+header{text-align:center;border-bottom:2px solid var(--purple-lt);padding-bottom:20px;margin-bottom:28px}
+.wordmark{font-family:var(--serif);font-weight:600;font-size:52px;letter-spacing:14px;color:var(--navy);margin-left:14px}
+.logo{height:100px;width:auto;display:block;margin:0 auto 4px}
+.avon{font-size:15px;letter-spacing:8px;color:var(--purple);font-weight:600;margin-top:2px}
+.sub{font-size:13px;color:var(--text-light);letter-spacing:2px;margin-top:12px;text-transform:uppercase}
+h2{font-family:var(--serif);font-weight:600;font-size:26px;margin:34px 0 16px;color:var(--navy-dark)}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+.kpi{background:var(--white);border-radius:12px;padding:18px 16px;text-align:center;box-shadow:0 1px 4px rgba(45,45,69,.06);border-top:3px solid var(--navy)}
+.kpi .n{font-family:var(--serif);font-size:38px;font-weight:700;color:var(--navy);line-height:1}
+.kpi .l{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--text-light);margin-top:8px}
+.highlight{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:6px}
+.hl{background:var(--white);border-radius:12px;padding:20px 22px;box-shadow:0 1px 4px rgba(45,45,69,.06)}
+.hl.win{border-left:4px solid var(--good)}
+.hl.lag{border-left:4px solid var(--warn)}
+.hl h3{font-size:13px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:12px}
+.hl.win h3{color:var(--good)} .hl.lag h3{color:var(--warn)}
+.hl .row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px dashed #e5ded5;font-size:14px}
+.hl .row:last-child{border-bottom:none}
+.hl .u{font-weight:600;color:var(--navy)}
+.hl .v{color:var(--text-body)}
+.charts{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.card{background:var(--white);border-radius:12px;padding:20px;box-shadow:0 1px 4px rgba(45,45,69,.06)}
+.card.full{grid-column:1/-1}
+.card h4{font-size:14px;letter-spacing:1px;text-transform:uppercase;color:var(--navy);margin-bottom:14px;font-weight:600}
+.controls{display:flex;gap:8px;margin-bottom:14px}
+.controls button{font-family:var(--sans);font-size:12px;letter-spacing:1px;text-transform:uppercase;border:1px solid var(--purple-lt);background:var(--white);color:var(--navy);padding:7px 16px;border-radius:20px;cursor:pointer;transition:.15s}
+.controls button.active{background:var(--navy);color:var(--white);border-color:var(--navy)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+th,td{padding:11px 10px;text-align:right;border-bottom:1px solid #ece5dc}
+th{font-size:11px;letter-spacing:1px;text-transform:uppercase;color:var(--text-light);cursor:pointer;user-select:none;white-space:nowrap}
+th:first-child,td:first-child{text-align:left}
+th.sorted{color:var(--navy)}
+td.unit{font-weight:700;color:var(--navy)}
+td.unit a{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--rune)}
+td.unit a:hover{color:#2f7f96;border-bottom-color:#2f7f96}
+.hl a{color:var(--navy);text-decoration:none;border-bottom:1px solid var(--rune)}
+.hl a:hover{color:#2f7f96}
+.badge{display:inline-block;font-size:10.5px;letter-spacing:.5px;padding:2px 9px;border-radius:20px;font-weight:600}
+.badge.sale{background:#e5e3ec;color:#3D3D5C}
+.badge.pend{background:#efe9f2;color:#8B7BA8}
+.legend{display:flex;gap:26px;margin:-4px 0 16px;font-size:13px;color:var(--text-body)}
+.legend i.sw{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:-2px;margin-right:6px}
+.legend i.active{background:var(--navy)}
+.legend i.pending{background:var(--purple)}
+.bar{height:6px;border-radius:3px;background:var(--rune);display:inline-block;vertical-align:middle;margin-left:8px}
+.note{font-size:12.5px;color:var(--text-light);margin-top:10px;line-height:1.6}
+.insights{background:var(--white);border-radius:12px;padding:24px 28px;box-shadow:0 1px 4px rgba(45,45,69,.06)}
+.insights p{margin-bottom:14px;color:var(--text-body);font-size:14.5px}
+.insights strong{color:var(--navy)}
+.foot{text-align:center;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--purple);margin-top:34px}
+@media(max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.charts,.highlight{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <img class="logo" alt="Skjól Avon" src="data:image/png;base64,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">
+    <div class="avon">A V O N</div>
+    <div class="sub">Zillow Listing Performance &nbsp;·&nbsp; 255 Chapel Pl, Avon CO &nbsp;·&nbsp; Snapshot Jul 6, 2026</div>
+  </header>
+
+  <div class="kpis" id="kpis"></div>
+
+  <h2>Top &amp; bottom performers</h2>
+  <div class="highlight" id="highlight"></div>
+
+  <h2>Traffic by unit</h2>
+  <div class="legend">
+    <span><i class="sw active"></i> Active &nbsp;(For sale)</span>
+    <span><i class="sw pending"></i> Pending &nbsp;(under contract)</span>
+  </div>
+  <div class="charts">
+    <div class="card"><h4>Views by unit</h4><canvas id="viewsChart" height="230"></canvas></div>
+    <div class="card"><h4>Saves by unit</h4><canvas id="savesChart" height="230"></canvas></div>
+    <div class="card full"><h4>Views vs. saves &nbsp;<span style="font-weight:400;text-transform:none;letter-spacing:0;color:var(--text-light)">(bubble size = price; upper-right = high interest)</span></h4><canvas id="scatterChart" height="120"></canvas></div>
+  </div>
+
+  <h2>All listings</h2>
+  <div class="card full">
+    <div class="controls" id="filters">
+      <button data-f="all" class="active">All (15)</button>
+      <button data-f="For sale">For sale (9)</button>
+      <button data-f="Pending">Pending (6)</button>
+    </div>
+    <table id="tbl">
+      <thead><tr>
+        <th data-k="u">Unit</th>
+        <th data-k="price">Price</th>
+        <th data-k="status">Status</th>
+        <th data-k="days">Days on Zillow</th>
+        <th data-k="views" class="sorted">Views</th>
+        <th data-k="vpd">Views / day</th>
+        <th data-k="saves">Saves</th>
+        <th data-k="rate">Save rate</th>
+      </tr></thead>
+      <tbody></tbody>
+    </table>
+    <div class="note">Views / day normalizes traffic by time on market — the fairest read for freshly listed units. Save rate (saves ÷ views) signals depth of interest, not just curiosity. Units under 1 day (215, 203) are shown but too new to rank.</div>
+  </div>
+
+  <h2>What the numbers say</h2>
+  <div class="insights" id="insights"></div>
+
+  <div class="foot">Vail Valley's Next Era of Luxury Living &nbsp;·&nbsp; skjolavon.com</div>
+</div>
+
+<script>
+const units=[
+ {u:'218',zpid:'463343580',price:1295000,status:'For sale',days:17,dLabel:'17d',views:120,saves:8},
+ {u:'309',zpid:'463344311',price:1995000,status:'For sale',days:17,dLabel:'17d',views:148,saves:9},
+ {u:'614',zpid:'463359932',price:6395000,status:'For sale',days:16,dLabel:'16d',views:129,saves:3},
+ {u:'201',zpid:'463344418',price:3700000,status:'Pending',days:17,dLabel:'17d',views:60,saves:5},
+ {u:'612',zpid:'463344202',price:4250000,status:'Pending',days:17,dLabel:'17d',views:70,saves:4},
+ {u:'411',zpid:'463477149',price:3250000,status:'Pending',days:10,dLabel:'10d',views:39,saves:2},
+ {u:'403',zpid:'463477241',price:2650000,status:'Pending',days:10,dLabel:'10d',views:51,saves:1},
+ {u:'509',zpid:'463501056',price:2775000,status:'Pending',days:9,dLabel:'9d',views:38,saves:1},
+ {u:'414',zpid:'463532609',price:3150000,status:'Pending',days:6,dLabel:'6d',views:49,saves:1},
+ {u:'409',zpid:'463555699',price:2650000,status:'For sale',days:5,dLabel:'5d',views:70,saves:1},
+ {u:'421',zpid:'463593914',price:2410000,status:'For sale',days:4,dLabel:'4d',views:42,saves:0},
+ {u:'303',zpid:'463614417',price:2350000,status:'For sale',days:3,dLabel:'3d',views:47,saves:1},
+ {u:'418',zpid:'463652708',price:2620000,status:'For sale',days:2,dLabel:'2d',views:49,saves:2},
+ {u:'215',zpid:'463668771',price:2150000,status:'For sale',days:0.5,dLabel:'<1d',views:12,saves:0},
+ {u:'203',zpid:'463668779',price:2195000,status:'For sale',days:0.5,dLabel:'<1d',views:8,saves:0},
+];
+units.forEach(d=>{d.url=`https://www.zillow.com/homedetails/255-Chapel-Pl-${d.u}-Avon-CO-81620/${d.zpid}_zpid/`;});
+const NAVY='#3D3D5C',PURPLE='#8B7BA8',RUNE='#7EC8E3',CREAM='#F5F0EB',TXT='#555566';
+units.forEach(d=>{d.vpd=+(d.views/d.days).toFixed(1);d.rate=+(d.saves/d.views*100).toFixed(1);});
+const money=n=>'$'+(n/1e6).toFixed(n<1e6?2:2).replace(/\.00$/,'')+'M';
+const sum=(a,k)=>a.reduce((s,x)=>s+x[k],0);
+const totV=sum(units,'views'),totS=sum(units,'saves');
+const forSale=units.filter(u=>u.status==='For sale'),pending=units.filter(u=>u.status==='Pending');
+
+// KPIs
+document.getElementById('kpis').innerHTML=[
+ ['15','Active listings'],
+ [totV,'Total views'],
+ [totS,'Total saves'],
+ [(totS/totV*100).toFixed(1)+'%','Avg save rate'],
+ ['6 / 9','Pending / For sale']
+].map(k=>`<div class="kpi"><div class="n">${k[0]}</div><div class="l">${k[1]}</div></div>`).join('');
+
+// Highlights
+const byViews=[...units].sort((a,b)=>b.views-a.views);
+const mature=units.filter(u=>u.days>=3);
+const byLagViews=[...mature].sort((a,b)=>a.views-b.views);
+const byU=Object.fromEntries(units.map(u=>[u.u,u]));
+const L=n=>`<a href="${byU[n].url}" target="_blank" rel="noopener">#${n}</a>`;
+const win=`<div class="hl win"><h3>★ Best performers</h3>
+ <div class="row"><span class="u">${L('309')}</span><span class="v">148 views · 9 saves — traffic leader</span></div>
+ <div class="row"><span class="u">${L('218')}</span><span class="v">120 views · 8 saves — best value, high interest</span></div>
+ <div class="row"><span class="u">${L('614')}</span><span class="v">129 views — draws curiosity at $6.4M</span></div>
+ <div class="row"><span class="u">${L('201')}</span><span class="v">8.3% save rate — highest conversion</span></div></div>`;
+const lag=`<div class="hl lag"><h3>▼ Needs attention</h3>
+ <div class="row"><span class="u">${L('509')}</span><span class="v">38 views · 1 save in 9 days — lowest traffic (mature)</span></div>
+ <div class="row"><span class="u">${L('421')}</span><span class="v">42 views · 0 saves in 4 days</span></div>
+ <div class="row"><span class="u">${L('409')}</span><span class="v">70 views but 1 save (1.4%) — lookers, few savers</span></div>
+ <div class="row"><span class="u">${L('614')}</span><span class="v">129 views · 3 saves (2.3%) — low save conversion</span></div></div>`;
+document.getElementById('highlight').innerHTML=win+lag;
+
+// Charts
+const barColor=u=>u.status==='Pending'?PURPLE:NAVY;
+function bars(id,key){
+ const d=[...units].sort((a,b)=>b[key]-a[key]);
+ new Chart(document.getElementById(id),{type:'bar',
+  data:{labels:d.map(x=>'#'+x.u),datasets:[{data:d.map(x=>x[key]),backgroundColor:d.map(barColor),borderRadius:4}]},
+  options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const x=d[c.dataIndex];return `${x[key]} ${key} · ${x.dLabel} · ${x.status}`;}}}},
+   scales:{x:{grid:{display:false},ticks:{color:TXT,font:{size:11}}},y:{grid:{color:'#eee'},ticks:{color:TXT}}}}});
+}
+bars('viewsChart','views');bars('savesChart','saves');
+
+new Chart(document.getElementById('scatterChart'),{type:'bubble',
+ data:{datasets:units.map(u=>({label:'#'+u.u,
+   data:[{x:u.views,y:u.saves,r:Math.max(6,Math.sqrt(u.price/1e6)*6)}],
+   backgroundColor:(u.status==='Pending'?'rgba(139,123,168,.55)':'rgba(61,61,92,.55)'),
+   borderColor:barColor(u),borderWidth:1}))},
+ options:{plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>{const u=units[c.datasetIndex];return `#${u.u}: ${u.views} views, ${u.saves} saves, ${money(u.price)}`;}}}},
+  scales:{x:{title:{display:true,text:'Views',color:TXT},grid:{color:'#eee'},ticks:{color:TXT}},
+          y:{title:{display:true,text:'Saves',color:TXT},grid:{color:'#eee'},ticks:{color:TXT}}}}});
+
+// Table
+let sortKey='views',sortDir=-1,filter='all';
+const tb=document.querySelector('#tbl tbody');
+const maxV=Math.max(...units.map(u=>u.views));
+function render(){
+ let rows=units.filter(u=>filter==='all'||u.status===filter).sort((a,b)=>{
+   let x=a[sortKey],y=b[sortKey];if(typeof x==='string')return sortDir*x.localeCompare(y);return sortDir*(x-y);});
+ tb.innerHTML=rows.map(u=>`<tr>
+   <td class="unit"><a href="${u.url}" target="_blank" rel="noopener" title="Open #${u.u} on Zillow">#${u.u} ↗</a></td>
+   <td>${money(u.price)}</td>
+   <td><span class="badge ${u.status==='Pending'?'pend':'sale'}">${u.status}</span></td>
+   <td>${u.dLabel}</td>
+   <td>${u.views}<span class="bar" style="width:${u.views/maxV*60}px"></span></td>
+   <td>${u.vpd}</td>
+   <td>${u.saves}</td>
+   <td>${u.rate}%</td></tr>`).join('');
+ document.querySelectorAll('th').forEach(th=>th.classList.toggle('sorted',th.dataset.k===sortKey));
+}
+document.querySelectorAll('#tbl th').forEach(th=>th.onclick=()=>{
+ const k=th.dataset.k;if(k===sortKey)sortDir*=-1;else{sortKey=k;sortDir=(k==='u'||k==='status')?1:-1;}render();});
+document.querySelectorAll('#filters button').forEach(b=>b.onclick=()=>{
+ document.querySelectorAll('#filters button').forEach(x=>x.classList.remove('active'));
+ b.classList.add('active');filter=b.dataset.f;render();});
+render();
+
+// Insights
+document.getElementById('insights').innerHTML=`
+<p>Units 201, 612, 411, 403, 509 and 414 have moved to Pending — the sales engine is clearly working, especially in the $2.6M–$4.25M band that has seen the most activity.</p>
+<p><strong>The traffic leaders are #309 (148 views, 9 saves) and #614 (129 views).</strong> #309 pairs the most views with the most saves, making it your single strongest still-available listing. #614, the $6.4M top unit, draws heavy curiosity but converts few saves (2.3%) — expected at that price point, but worth premium photography or a feature video to turn views into saved interest.</p>
+<p><strong>Best value = best interest:</strong> entry-priced #218 ($1.295M) has 120 views and 8 saves (6.7% save rate), and #201 leads on conversion at an 8.3% save rate. Affordability and genuine buyer intent are tracking together.</p>
+<p><strong>Watch list.</strong> Among listings live long enough to judge, #509 is the softest — 38 views and 1 save over 9 days. #421 has 42 views but zero saves in 4 days, and #409 shows a lot of lookers (70 views) but only one save. These are candidates for a price check, refreshed lead photo, or a "just listed" boost. The newest units (#215, #203, both under a day) are simply too early to read.</p>
+<p style="color:var(--text-light);font-size:12.5px"><strong>Method:</strong> figures pulled live from each unit's public Zillow listing page (views, saves, days on Zillow) on Jul 6, 2026. Views/day = cumulative views ÷ days on market. Save rate = saves ÷ views.</p>`;
+</script>
+</body>
+</html>
